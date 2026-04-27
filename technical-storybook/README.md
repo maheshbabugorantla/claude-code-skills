@@ -32,7 +32,6 @@ Optionally generates a per-act visual prompt (one per act) compatible with any i
 ## Pairs well with
 
 - [`/crayon-illustration`](../crayon-illustration/) — whimsical, approachable visuals for each act
-- `/finserv-illustration`, `/healthcare-illustration`, `/saas-illustration` — domain-specific visual styles
 
 ## Style-agnostic
 

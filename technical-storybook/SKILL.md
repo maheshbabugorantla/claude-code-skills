@@ -1,10 +1,10 @@
 ---
 name: technical-storybook
-description: Design and generate 12-act narrative storyboards that explain technical concepts through contrastive argumentation. Uses a consulting-style discovery intake (domain research, hypothesis, qualifying questions), runs a scope triage to detect when a concept won't fit in 12 acts and offers to break it into a chapter series (each chapter ≤12 illustrations), then enters plan mode to gate generation on a translation-table + act-blueprint approval before writing the full outline. Use when user says "create a storybook", "explain using storybook method", "technical storybook", "narrative explanation", "12-act explanation", "storyboard for", "argue why X beats Y", or "/technical-storybook". Style-agnostic — pairs with /crayon-illustration, /finserv-illustration, /healthcare-illustration, or plain text.
+description: Design and generate 12-act narrative storyboards that explain technical concepts through contrastive argumentation. Uses a consulting-style discovery intake (domain research, hypothesis, qualifying questions), runs a scope triage to detect when a concept won't fit in 12 acts and offers to break it into a chapter series (each chapter ≤12 illustrations), then enters plan mode to gate generation on a translation-table + act-blueprint approval before writing the full outline. Use when user says "create a storybook", "explain using storybook method", "technical storybook", "narrative explanation", "12-act explanation", "storyboard for", "argue why X beats Y", or "/technical-storybook". Style-agnostic — pairs with /crayon-illustration or plain text.
 metadata:
   author: maheshbabugorantla
   version: 1.0.0
-  pairs-with: crayon-illustration, finserv-illustration, healthcare-illustration
+  pairs-with: crayon-illustration
 allowed-tools:
   - Read
   - Write
@@ -276,12 +276,11 @@ Use the act-by-act guide in [references/act-by-act-guide.md](references/act-by-a
 
 ### Step 6: Visual Generation (Optional)
 
-If the user wants illustrations, generate 12 image prompts compatible with any illustration style skill:
+If the user wants illustrations, generate 12 image prompts compatible with any illustration style skill. The skill currently ships with one paired illustration style:
 
 - `/crayon-illustration` — hand-drawn crayon style, children's book feel
-- `/finserv-illustration` — flat design, consulting-quality infographics
-- `/healthcare-illustration` — clinical precision, medical journal quality
-- `/saas-illustration` — dark mode, glass morphism, modern tech feel
+
+The methodology is style-agnostic — the per-act visual specifications produced in Step 5 can be fed to any other illustration skill the user has installed.
 
 Each prompt follows the illustration skill's format and references the visual specification from Step 5. Include a CONTEXT.md companion document (see `references/examples.md` Section 2 for a worked example of its structure and contents) that provides narrative arc, domain model, visual consistency rules, and cross-image checklist.
 
