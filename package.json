@@ -1,0 +1,36 @@
+{
+  "name": "@maheshbabugorantla/cc-skills",
+  "version": "1.0.0",
+  "description": "AWS architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — three Claude Code skills installable via npx",
+  "bin": {
+    "cc-skills": "./bin/install.js"
+  },
+  "files": [
+    "bin",
+    "aws-illustration",
+    "crayon-illustration",
+    "technical-storybook"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "skills",
+    "aws",
+    "illustration",
+    "storybook",
+    "diagram"
+  ],
+  "author": "Mahesh Babu Gorantla",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maheshbabugorantla/cc-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maheshbabugorantla/cc-skills/issues"
+  },
+  "homepage": "https://github.com/maheshbabugorantla/cc-skills#readme"
+}

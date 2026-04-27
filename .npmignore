@@ -1,0 +1,7 @@
+.claude/
+.github/
+tests/
+scripts/
+*.test.js
+.DS_Store
+*.tgz
