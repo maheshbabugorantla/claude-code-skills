@@ -8,6 +8,8 @@ metadata:
 allowed-tools:
   - Read
   - Write
+  - WebFetch
+  - WebSearch
 ---
 
 # Technical Storybook
@@ -122,15 +124,77 @@ For complete validation criteria, see the checklist in [references/examples.md](
 
 When invoked, follow these 6 steps:
 
-### Step 1: Intake
+### Step 1: Consulting Discovery
 
-Ask the user 3 questions:
+#### 1a. Domain Research (run before asking any questions)
 
-1. **What concept are you arguing for?** (e.g., "Graph RAG", "event sourcing", "microservices")
-2. **What domain or analogy should the storyboard use?** (e.g., "pharmaceutical drug interactions", "Netflix recommendations", "cybersecurity threat intelligence")
-3. **What are 2-3 competing approaches the audience might try first?** (e.g., "SQL queries, vector search, multi-agent orchestration")
+Parse the user's request to identify the concept being argued for, then fetch to build a factual foundation — do not skip this even if the user seems expert:
 
-If the user provides all three upfront (e.g., "create a storybook explaining why event sourcing beats CRUD for audit-heavy systems"), extract the answers and proceed.
+1. **Fetch the concept's authoritative source** — search for the primary paper, documentation page, or canonical blog post that defines the concept and its value proposition.
+2. **Fetch the competitive landscape** — search for "[concept] vs alternatives" comparisons. Look for benchmark data, tradeoff articles, and practitioner adoption stories.
+3. **Classify the primary domain** — assign one primary domain: `data-infrastructure`, `ml-ai`, `distributed-systems`, `devops-platform`, `security`, `database`, `organizational`, or `other`. Note if it spans two.
+4. **Inventory standard competing approaches** — from what you fetched, identify the 2–4 alternatives the target audience most commonly reaches for first. Rank them by how instinctive each is to a practitioner who hasn't encountered the proposed concept yet.
+5. **Flag any ambiguity** — note if the concept has meaningfully different interpretations (e.g., "microservices" could be framed as infrastructure, team topology, or API design). Surface at most two candidate framings.
+
+#### 1b. Domain Hypothesis (present before asking questions)
+
+Synthesize your research into a one-paragraph framing and present it to the user for confirmation. Use this structure:
+
+> "From what I found, **[concept]** is a **[domain]** approach whose core argument is **[value proposition in one sentence]**. The most common competing approaches your audience is likely to try first are **[alternatives in ranked order]**. This storyboard would typically target **[audience type]** — practitioners who already know **[assumed knowledge]** but haven't yet seen why **[concept]** handles **[specific failure mode]** differently.
+>
+> Does this framing match your intent? Is there a specific use case, industry, or deployment context you want to center on?"
+
+If ambiguity was detected in 1a, present the candidate framings and ask which one to pursue before continuing. Do not proceed to 1c until the domain is confirmed.
+
+#### 1c. Consulting Qualification (ask before generating anything)
+
+Once the domain is confirmed, work through these four discovery questions in sequence. If the user already provided the information upfront, extract it and skip that question — but do not skip a question where the answer would materially change the storyboard:
+
+---
+
+**Q1 — Domain expertise: What is your relationship to [concept]?**
+
+> (a) **Practitioner** — I've deployed this in production and have first-hand results  
+> (b) **Technical advocate** — I've evaluated it thoroughly and need to convince peers or leadership  
+> (c) **Informed learner** — I understand it conceptually and want to help others articulate it  
+
+_Why it matters:_ Determines depth of Acts 2–4 (how technically precise the failure analysis must be), the specificity of Act 7 (trade-off matrix), and whether to include hedging language vs. confident assertion throughout. A Practitioner's storyboard should have sharper failure descriptions and more specific failure numbers. An Informed Learner's storyboard needs more foundational setup before the frustration arc begins.
+
+---
+
+**Q2 — Audience calibration: Describe your target audience.**
+
+Ask: "What do they know well going in, and what will they be most skeptical about?"
+
+_Why it matters:_ Determines which failure modes (Acts 2–4) land hardest — a DBA audience will feel Act 2's SQL JOIN tower differently than a data scientist who barely writes SQL. Also shapes which analogies work in Acts 5–6 and how much background to build in Act 1 before beginning the frustration arc.
+
+---
+
+**Q3 — Evidence inventory: What specific evidence can you contribute?**
+
+Ask the user to select all that apply:
+
+> (a) Production benchmark numbers with context (latency, cost, accuracy delta)  
+> (b) Published paper or case study citations  
+> (c) A/B test results or controlled comparisons  
+> (d) War stories / lessons-learned anecdotes  
+> (e) None — synthesize from research I've already done  
+
+_Why it matters:_ Shapes Act 8 (The Evidence). User-supplied numbers always produce stronger storyboards than synthesized benchmarks because they carry authenticity the audience can verify. If the user selects (e), do an additional web fetch specifically for benchmark data before building Act 8.
+
+---
+
+**Q4 — Competing approaches: Confirm the failure sequence.**
+
+Present the alternatives you ranked in step 1a and ask: "Which of these will your audience have actually tried or be most tempted by, and in what order? The first alternative becomes Act 2 (the brute-force instinct), the second Act 3 (the fashionable shortcut), and the third Act 4 (the expensive guide that almost works)."
+
+The order matters: Act 2 should be the most obvious first instinct (usually the simplest approach), Act 3 the currently fashionable alternative that seems to solve the problem but misses something structural, and Act 4 the sophisticated approach that works but at unsustainable cost or complexity.
+
+---
+
+After all four questions are answered and confirmed, proceed to Step 2.
+
+If the user provides all context upfront (e.g., "create a storybook explaining why event sourcing beats CRUD for audit-heavy systems targeting senior engineers who already use Postgres"), still run 1a and 1b to validate your understanding, then skip any 1c questions already answered.
 
 ### Step 2: Question Design
 
