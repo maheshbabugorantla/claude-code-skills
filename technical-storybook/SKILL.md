@@ -1,6 +1,6 @@
 ---
 name: technical-storybook
-description: Design and generate 12-act narrative storyboards that explain technical concepts through contrastive argumentation. Teaches the methodology AND generates domain-specific storyboards on demand. Use when user says "create a storybook", "explain using storybook method", "technical storybook", "narrative explanation", "12-act explanation", "storyboard for", "argue why X beats Y", or "/technical-storybook". Style-agnostic — pairs with /crayon-illustration, /finserv-illustration, /healthcare-illustration, or plain text.
+description: Design and generate 12-act narrative storyboards that explain technical concepts through contrastive argumentation. Uses a consulting-style discovery intake (domain research, hypothesis, qualifying questions), then enters plan mode to gate generation on a translation-table + act-blueprint approval before writing the full outline. Use when user says "create a storybook", "explain using storybook method", "technical storybook", "narrative explanation", "12-act explanation", "storyboard for", "argue why X beats Y", or "/technical-storybook". Style-agnostic — pairs with /crayon-illustration, /finserv-illustration, /healthcare-illustration, or plain text.
 metadata:
   author: maheshbabugorantla
   version: 1.0.0
@@ -122,7 +122,7 @@ For complete validation criteria, see the checklist in [references/examples.md](
 
 ## 4. Generation Workflow
 
-When invoked, follow these 6 steps:
+When invoked, follow these 7 steps (Step 4 enters plan mode for blueprint approval before the full outline is written):
 
 ### Step 1: Consulting Discovery
 
@@ -213,7 +213,22 @@ Present the question to the user for approval before proceeding.
 
 Fill all 13 slots of the translation table (Section 3) with domain-specific content. Present to the user for review. This is the blueprint for the entire storyboard.
 
-### Step 4: Generate 12-Act Outline
+### Step 4: Plan Approval (plan mode)
+
+Compile the artifacts produced in Steps 1–3 into a single blueprint and enter plan mode so the user can review and approve the storyboard direction before any detailed prose is written.
+
+**Compile the following:**
+
+1. **Discovery summary** — domain classification, audience description, expertise level, evidence inventory, and the ranked competing approaches (from Steps 1b + 1c).
+2. **Act 1 question** (from Step 2) with its 3-entities / 2-constraints / 1-filter breakdown listed explicitly.
+3. **Translation table** — all 13 slots filled (from Step 3), formatted as a compact table.
+4. **Act blueprint** — a 12-row table with these columns only: Act # · Title · One-line argument · Visual type · Emotional beat. Do not write chapter subtitles, speaker notes, key insights, or narrative beats yet — those come after approval.
+
+**Then call `ExitPlanMode`** to surface the blueprint for user review.
+
+On approval, proceed to Step 5 (full outline). If the user requests revisions, identify which upstream artifact needs to change (translation table → Step 3, question → Step 2, discovery premises → Step 1c), update it, and re-enter the gate before regenerating.
+
+### Step 5: Generate 12-Act Outline
 
 For each act, produce:
 
@@ -226,7 +241,7 @@ For each act, produce:
 
 Use the act-by-act guide in [references/act-by-act-guide.md](references/act-by-act-guide.md) for detailed specifications.
 
-### Step 5: Visual Generation (Optional)
+### Step 6: Visual Generation (Optional)
 
 If the user wants illustrations, generate 12 image prompts compatible with any illustration style skill:
 
@@ -235,9 +250,9 @@ If the user wants illustrations, generate 12 image prompts compatible with any i
 - `/healthcare-illustration` — clinical precision, medical journal quality
 - `/saas-illustration` — dark mode, glass morphism, modern tech feel
 
-Each prompt follows the illustration skill's format and references the visual specification from Step 4. Include a CONTEXT.md companion document (see `references/examples.md` Section 2 for a worked example of its structure and contents) that provides narrative arc, domain model, visual consistency rules, and cross-image checklist.
+Each prompt follows the illustration skill's format and references the visual specification from Step 5. Include a CONTEXT.md companion document (see `references/examples.md` Section 2 for a worked example of its structure and contents) that provides narrative arc, domain model, visual consistency rules, and cross-image checklist.
 
-### Step 6: Review
+### Step 7: Review
 
 Validate the complete storyboard against:
 

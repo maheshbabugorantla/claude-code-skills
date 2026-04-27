@@ -23,6 +23,8 @@ A complete storyboard outline following a 12-act dramatic arc mapped to Bloom's 
 | Generalization | 9–10 | Confidence |
 | Action | 11–12 | Resolve |
 
+The workflow includes a consulting-style discovery intake (domain research, audience qualification) followed by a **plan-mode gate**: the skill presents the translation table + act-by-act blueprint for your approval before generating any detailed prose. Edit direction before paying for the full outline.
+
 Optionally generates a per-act visual prompt (one per act) compatible with any illustration skill.
 
 ## Pairs well with
