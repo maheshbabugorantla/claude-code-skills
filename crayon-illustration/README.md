@@ -18,6 +18,8 @@ A detailed, copy-pasteable prompt saved to `img/<slug>-prompt.md`. The prompt sp
 - Fixed pastel palette: Blue `#A8D8EA`, Green `#B5EAD7`, Yellow/Orange `#FFDAC1`, Purple `#C7CEEA`, Pink/Coral `#FFB7B2`
 - Sketchy black borders, 16:9 aspect ratio, 1920×1080 export target
 
+The skill runs a brief **discovery step** (audience, slide context, takeaway message) before layout selection so the generated prompt emphasizes the right component and uses the right label density. For multi-component layouts (`architecture`/`workflow` ≥5 components, `split-panel`, `process-flow`) it enters **plan mode** to review the component list + arrow labels before writing the full prompt — so you can redirect before rendering.
+
 ## Pairs well with
 
 - [`/technical-storybook`](../technical-storybook/) — generate crayon visuals for each of the 12 acts
