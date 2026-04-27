@@ -25,6 +25,8 @@ A complete storyboard outline following a 12-act dramatic arc mapped to Bloom's 
 
 The workflow includes a consulting-style discovery intake (domain research, audience qualification) followed by a **plan-mode gate**: the skill presents the translation table + act-by-act blueprint for your approval before generating any detailed prose. Edit direction before paying for the full outline.
 
+If the concept is too large for a single 12-illustration storyboard (multiple paradigm shifts, prerequisite stack, compound topic, mixed audiences, or entity/relationship inflation), the skill runs a **scope triage** in Step 1d, notifies you with the specific signals that fired, and offers to break the story into a **chapter series** — each chapter is its own 12-act storyboard (≤12 illustrations) sharing a meta-arc, with one plan-mode gate per chapter. You can accept the chapter series or pick a compressed single storyboard with the tradeoff documented explicitly.
+
 Optionally generates a per-act visual prompt (one per act) compatible with any illustration skill.
 
 ## Pairs well with

@@ -1,6 +1,6 @@
 ---
 name: technical-storybook
-description: Design and generate 12-act narrative storyboards that explain technical concepts through contrastive argumentation. Uses a consulting-style discovery intake (domain research, hypothesis, qualifying questions), then enters plan mode to gate generation on a translation-table + act-blueprint approval before writing the full outline. Use when user says "create a storybook", "explain using storybook method", "technical storybook", "narrative explanation", "12-act explanation", "storyboard for", "argue why X beats Y", or "/technical-storybook". Style-agnostic — pairs with /crayon-illustration, /finserv-illustration, /healthcare-illustration, or plain text.
+description: Design and generate 12-act narrative storyboards that explain technical concepts through contrastive argumentation. Uses a consulting-style discovery intake (domain research, hypothesis, qualifying questions), runs a scope triage to detect when a concept won't fit in 12 acts and offers to break it into a chapter series (each chapter ≤12 illustrations), then enters plan mode to gate generation on a translation-table + act-blueprint approval before writing the full outline. Use when user says "create a storybook", "explain using storybook method", "technical storybook", "narrative explanation", "12-act explanation", "storyboard for", "argue why X beats Y", or "/technical-storybook". Style-agnostic — pairs with /crayon-illustration, /finserv-illustration, /healthcare-illustration, or plain text.
 metadata:
   author: maheshbabugorantla
   version: 1.0.0
@@ -192,9 +192,40 @@ The order matters: Act 2 should be the most obvious first instinct (usually the 
 
 ---
 
-After all four questions are answered and confirmed, proceed to Step 2.
+After all four questions are answered and confirmed, proceed to Step 1d.
 
 If the user provides all context upfront (e.g., "create a storybook explaining why event sourcing beats CRUD for audit-heavy systems targeting senior engineers who already use Postgres"), still run 1a and 1b to validate your understanding, then skip any 1c questions already answered.
+
+#### 1d. Scope Triage (run before Step 2)
+
+A single 12-act storyboard has a fixed visual budget: **12 illustrations, one paradigm shift, one failure cascade**. Some concepts overflow that budget. Before committing to a single storyboard, audit the discovery output for these signals:
+
+1. **Entity / relationship inflation** — translation slots 2–3 (Section 3) would need more than 5 entity types or more than 5 relationship types to honestly model the domain. Compressing further would force generic labels that fail the concreteness test.
+2. **Multiple paradigm shifts** — the failure cascade reveals more than one categorical reframe is required. Act 5 is a single-shot dramatic device; trying to land two reframes in one act flattens both.
+3. **Prerequisite stack** — the audience needs to internalize an underlying concept first that itself merits its own failure cascade (e.g., explaining "transformer attention" presupposes "why RNNs failed at long context" — that's a prequel chapter, not an Act 1 footnote).
+4. **Compound topic** — the user's concept is actually 2+ topics fused (e.g., "modern observability" = metrics + traces + logs, each with its own failure modes and paradigm).
+5. **Mixed audience** — the storyboard needs to land for two distinct skill levels with different failure-cascade entry points. One Act 2 cannot serve both.
+
+**Decision rule:** if **2 or more signals fire**, notify the user the concept won't fit in a single 12-act storyboard. Use this template:
+
+> "From the discovery, **[concept]** has scope signals that don't fit cleanly into a single 12-act storyboard:
+> - **[signal name]:** [one-sentence evidence from the research/answers]
+> - **[signal name]:** [one-sentence evidence]
+>
+> I recommend breaking this into a **chapter series** of [N] chapters, each its own 12-act storyboard sharing a meta-arc:
+> - **Chapter 1 — [title]:** [sub-concept] · audience focus: [who] · paradigm shift: [what]
+> - **Chapter 2 — [title]:** [sub-concept] · audience focus: [who] · paradigm shift: [what]
+> - …
+>
+> **Alternative:** I can compress to a single 12-act storyboard, but that means **[specific tradeoff]** — for example, 'dropping the prerequisite cascade and assuming readers already understand X' or 'merging two paradigm shifts into Act 5 which weakens the dramatic arc'.
+>
+> Which approach should we take — chapter series or compressed single storyboard?"
+
+If fewer than 2 signals fire, proceed directly to Step 2 with a single storyboard.
+
+If the user picks **chapter series**, switch to the **Chapter Mode workflow** (Section 4.1 below) instead of proceeding linearly to Step 2.
+
+If the user picks **compressed single storyboard**, document the tradeoff explicitly in the Step 4 plan-mode blueprint so the user re-confirms with full visibility, then proceed to Step 2.
 
 ### Step 2: Question Design
 
@@ -228,6 +259,8 @@ Compile the artifacts produced in Steps 1–3 into a single blueprint and enter 
 
 On approval, proceed to Step 5 (full outline). If the user requests revisions, identify which upstream artifact needs to change (translation table → Step 3, question → Step 2, discovery premises → Step 1c), update it, and re-enter the gate before regenerating.
 
+**In chapter mode, this gate runs once per chapter** — each chapter's plan-mode blueprint includes an extra "Position in meta-arc" line referencing the prior and subsequent chapters. See Section 4.1 for the full chapter loop.
+
 ### Step 5: Generate 12-Act Outline
 
 For each act, produce:
@@ -259,6 +292,51 @@ Validate the complete storyboard against:
 1. The concreteness test (Section 3) for all 12 visuals
 2. The domain translation checklist in [references/examples.md](references/examples.md)
 3. The emotional arc progression: Curiosity → Overwhelm → Deception → Frustration → Revelation → Clarity → Trust → Conviction → Recognition → Empowerment → Motivation → Resolution
+
+**In chapter mode, also run the cross-chapter review checklist** in Section 4.1.
+
+---
+
+## 4.1 Chapter Mode (when 12 acts isn't enough)
+
+Triggered by Step 1d when 2+ scope signals fire and the user picks "chapter series." Each chapter is a complete 12-act storyboard (max 12 illustrations) with its own paradigm shift; chapters compose into a meta-arc that resolves the original concept.
+
+### Chapter design constraints
+
+Every chapter must individually satisfy the standard rules — and additionally satisfy the meta-arc rules:
+
+- **Per-chapter (same as standard):** ≤ 12 illustrations · own Act 1 question · own failure cascade · own Act 5 paradigm shift · own honest tradeoff matrix · own callback in Act 12.
+- **Meta-arc rules:**
+  - **Sequencing builds knowledge** — each chapter unlocks the next. Chapter N's Act 12 callback should plant the question Chapter N+1 opens with.
+  - **No reframe duplication** — two chapters cannot share the same paradigm shift; if they do, collapse them into one.
+  - **Final chapter resolves the original concept** — Chapter N's Act 12 callback returns to the user's original topic, not just Chapter N's narrow question.
+  - **Total visual budget** — N × 12 illustrations. Be honest about the cost; if N > 4, push back and ask whether the user really needs all chapters or whether some are reference material.
+
+### Chapter Mode workflow
+
+Replace the linear Steps 2–7 with this loop:
+
+**Step 1d → 1e: Chapter Decomposition.** Confirm the chapter outline produced in 1d — titles, sub-concepts, audience focus per chapter, paradigm shift per chapter, and the meta-arc handoffs between chapters. Validate against the meta-arc rules above. Get user approval on the outline before continuing.
+
+**Per-chapter loop (run for each chapter sequentially):**
+
+- **Step 2 (per chapter):** Question Design — craft Act 1's question for *this chapter's* sub-concept, validating against the standard 3/2/1 criteria.
+- **Step 3 (per chapter):** Translation Table — fill the 13 slots for this chapter's sub-domain.
+- **Step 4 (per chapter):** Plan Approval — enter plan mode with the chapter's discovery summary, Act 1 question, translation table, 12-act blueprint, **plus a "Position in meta-arc" line** showing what came before and what comes next. `ExitPlanMode` to request approval. Per chapter.
+- **Step 5 (per chapter):** Generate the 12-act outline for this chapter.
+- **Step 6 (per chapter, optional):** Visual generation for this chapter's 12 acts.
+
+**Step 7: Cross-Chapter Review.** After all chapters are generated, validate:
+
+1. **Per-chapter checks** — run the standard Step 7 checklist for each chapter individually.
+2. **Meta-arc cohesion** — does each chapter's Act 12 callback plant the question its successor opens with? If not, repair the handoff.
+3. **No reframe duplication** — confirm no two chapters share a paradigm shift.
+4. **Original concept resolved** — confirm the final chapter's Act 12 callback returns to the user's original topic.
+5. **Visual budget honored** — total illustration count is ≤ N × 12.
+
+### Anti-pattern: chapter mode as scope creep
+
+Chapter mode is a structural fix for genuinely oversized concepts, not a feature-creep mechanism. Do not propose chapter mode for concepts that fit cleanly in 12 acts even if the user *wants* a longer storyboard. The compressed single storyboard with explicit tradeoffs is almost always the better answer when only 1 scope signal fires.
 
 ---
 
