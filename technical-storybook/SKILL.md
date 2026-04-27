@@ -1,6 +1,6 @@
 ---
 name: technical-storybook
-description: Design and generate 12-act narrative storyboards that explain technical concepts through contrastive argumentation. Uses a consulting-style discovery intake (domain research, hypothesis, qualifying questions), runs a scope triage to detect when a concept won't fit in 12 acts and offers to break it into a chapter series (each chapter ≤12 illustrations), then enters plan mode to gate generation on a translation-table + act-blueprint approval before writing the full outline. Use when user says "create a storybook", "explain using storybook method", "technical storybook", "narrative explanation", "12-act explanation", "storyboard for", "argue why X beats Y", or "/technical-storybook". Style-agnostic — pairs with /crayon-illustration or plain text.
+description: Design and generate 12-act narrative storyboards that explain technical concepts through contrastive argumentation. Uses a consulting-style discovery intake (domain research, hypothesis, qualifying questions), runs a scope triage to detect when a concept won't fit in 12 acts and offers to break it into a chapter series (each chapter ≤12 illustrations), then enters plan mode to gate generation on a translation-table + act-blueprint approval before writing the full outline. The completed storyboard is saved to `storyboard/<slug>/storyboard.md` (or `chapter-N/storyboard.md` per chapter) and the skill prints the exact `/crayon-illustration --from-storyboard <path>` command for the user to run next. Use when user says "create a storybook", "explain using storybook method", "technical storybook", "narrative explanation", "12-act explanation", "storyboard for", "argue why X beats Y", or "/technical-storybook". Style-agnostic — pairs with /crayon-illustration or plain text.
 metadata:
   author: maheshbabugorantla
   version: 1.0.0
@@ -261,28 +261,71 @@ On approval, proceed to Step 5 (full outline). If the user requests revisions, i
 
 **In chapter mode, this gate runs once per chapter** — each chapter's plan-mode blueprint includes an extra "Position in meta-arc" line referencing the prior and subsequent chapters. See Section 4.1 for the full chapter loop.
 
-### Step 5: Generate 12-Act Outline
+### Step 5: Generate 12-Act Outline and Save to File
 
 For each act, produce:
 
 - **Title** — short, evocative (e.g., "The Brute Force Path", "The Thread Was Always There")
 - **Chapter subtitle** — one sentence describing the act's argument
 - **Key insight** — the single idea the audience should retain
-- **Visual description** — layout type, key elements, color assignments
+- **Visual type** — one of: `concept-diagram`, `split-panel`, `fragment-diagram`, `pipeline`, `four-lane-comparison`, `architecture`, `grid-comparison`, `benchmark-cards`, `grid-industry`, `decision-flowchart`, `workflow`, `stat-circles`
+- **Crayon layout** — the corresponding `/crayon-illustration` type, looked up from the Visual Type Mapping in [references/storyboard-format.md](references/storyboard-format.md)
+- **Visual description** — layout, key elements, color assignments
+- **Components (L→R)** — for multi-component visuals: 3–7 ordered components (with optional sublabels)
+- **Arrow labels** — for diagrams with connections: what each arrow's label says
 - **Narrative beat** — the audience's emotional state at the end of this act
 - **Speaker note** — 2-3 sentences of delivery guidance (pacing, pauses, emphasis)
 
 Use the act-by-act guide in [references/act-by-act-guide.md](references/act-by-act-guide.md) for detailed specifications.
 
-### Step 6: Visual Generation (Optional)
+**Then save the complete storyboard to a file** so paired illustration skills can consume it (and so the user has a durable artifact independent of the chat session):
 
-If the user wants illustrations, generate 12 image prompts compatible with any illustration style skill. The skill currently ships with one paired illustration style:
+| Mode | File path |
+|---|---|
+| Single storyboard | `storyboard/<slug>/storyboard.md` |
+| Chapter mode (chapter N of M) | `storyboard/<slug>/chapter-N/storyboard.md` |
 
-- `/crayon-illustration` — hand-drawn crayon style, children's book feel
+In chapter mode, each chapter writes to its own subdirectory (`chapter-1/`, `chapter-2/`, …) so per-chapter prompts and images don't collide across chapters. The whole series is rooted at `storyboard/<slug>/`.
 
-The methodology is style-agnostic — the per-act visual specifications produced in Step 5 can be fed to any other illustration skill the user has installed.
+The file format — YAML frontmatter (concept, slug, audience, expertise, takeaway, chapter position) plus the discovery summary, Act 1 question, translation table, and the 12 per-act sections containing every field above — is defined in [references/storyboard-format.md](references/storyboard-format.md). Follow it exactly so any consumer skill can read the file.
 
-Each prompt follows the illustration skill's format and references the visual specification from Step 5. Include a CONTEXT.md companion document (see `references/examples.md` Section 2 for a worked example of its structure and contents) that provides narrative arc, domain model, visual consistency rules, and cross-image checklist.
+### Step 6: Hand Off to Illustration Skill (Optional)
+
+If the user wants illustrations, do **not** generate prompts inline. Hand off to an illustration skill that consumes the storyboard file from Step 5. The methodology is style-agnostic — any installed skill that supports `--from-storyboard <path>` can read the file (`/crayon-illustration` is the paired skill that ships with this repo; future styles like `/aws-illustration --from-storyboard` would slot in the same way).
+
+Display the exact handoff command(s) at the end of the conversation. For the crayon-illustration pairing:
+
+**Single mode:**
+
+> Storyboard saved to `storyboard/<slug>/storyboard.md`. To generate visuals, run:
+>
+> ```
+> /crayon-illustration --from-storyboard storyboard/<slug>/storyboard.md
+> ```
+>
+> It will produce one prompt per act at `storyboard/<slug>/act-NN-prompt.md`.
+
+**Chapter mode** — offer two options. Auto-loop is the default recommendation:
+
+> Storyboards saved to `storyboard/<slug>/chapter-1/storyboard.md` through `storyboard/<slug>/chapter-N/storyboard.md`. You can generate visuals two ways:
+>
+> **All chapters at once (recommended):**
+>
+> ```
+> /crayon-illustration --from-storyboard storyboard/<slug>/
+> ```
+>
+> Pointed at the series root, the illustration skill auto-detects the chapter subdirectories and loops through each one in numerical order, writing per-act prompts into the matching `chapter-N/act-NN-prompt.md` paths.
+>
+> **One chapter at a time:**
+>
+> ```
+> /crayon-illustration --from-storyboard storyboard/<slug>/chapter-1/storyboard.md
+> ```
+>
+> Run once per chapter when you want to review each chapter's prompts before generating the next.
+
+The handoff command is the artifact — like gstack's `office-hours` → `plan-eng-review` pattern, the storyboard file on disk is what the next skill reads. The user runs the command explicitly; this skill never invokes another skill silently.
 
 ### Step 7: Review
 
@@ -322,8 +365,8 @@ Replace the linear Steps 2–7 with this loop:
 - **Step 2 (per chapter):** Question Design — craft Act 1's question for *this chapter's* sub-concept, validating against the standard 3/2/1 criteria.
 - **Step 3 (per chapter):** Translation Table — fill the 13 slots for this chapter's sub-domain.
 - **Step 4 (per chapter):** Plan Approval — enter plan mode with the chapter's discovery summary, Act 1 question, translation table, 12-act blueprint, **plus a "Position in meta-arc" line** showing what came before and what comes next. `ExitPlanMode` to request approval. Per chapter.
-- **Step 5 (per chapter):** Generate the 12-act outline for this chapter.
-- **Step 6 (per chapter, optional):** Visual generation for this chapter's 12 acts.
+- **Step 5 (per chapter):** Generate the 12-act outline for this chapter and save it to `storyboard/<slug>/chapter-N/storyboard.md` (each chapter gets its own subdirectory under the series root, with N the chapter index). Use the format defined in [references/storyboard-format.md](references/storyboard-format.md) — including frontmatter `chapter.position`, `chapter.total`, `chapter.prev_callback`, and `chapter.next_question` so the meta-arc is preserved on disk.
+- **Step 6 (after all chapters):** Display two handoff options. Recommend the directory form first (`/crayon-illustration --from-storyboard storyboard/<slug>/`) which auto-loops every chapter in numerical order; offer the per-chapter form (`/crayon-illustration --from-storyboard storyboard/<slug>/chapter-1/storyboard.md`, etc.) as an alternative when the user wants to review each chapter's prompts before producing the next.
 
 **Step 7: Cross-Chapter Review.** After all chapters are generated, validate:
 

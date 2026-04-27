@@ -1,6 +1,6 @@
 ---
 name: crayon-illustration
-description: Generate a detailed AI image generation prompt in the hand-drawn crayon style for use with Gemini, DALL-E, Midjourney, or other AI image tools. Supports 7 layout types for technical concepts — concept-cards, mapping, architecture, workflow, grid, split-panel, process-flow. Runs a brief discovery (audience, slide context, takeaway), scope triage (detects topics too dense for one image and recommends /technical-storybook), and auto type recommendation (suggests a layout when none is given) before layout selection. Enters plan mode for component-list approval on multi-component layouts (architecture/workflow ≥5 components, split-panel, process-flow) before writing the full prompt. Use when the user says "create a crayon illustration", "hand-drawn diagram", "sketch-style visual", "crayon-style prompt", or "/crayon-illustration". Pairs well with /technical-storybook to generate visuals for each act.
+description: Generate a detailed AI image generation prompt in the hand-drawn crayon style for use with Gemini, DALL-E, Midjourney, or other AI image tools. Supports 7 layout types for technical concepts — concept-cards, mapping, architecture, workflow, grid, split-panel, process-flow. Runs a brief discovery (audience, slide context, takeaway), scope triage (detects topics too dense for one image and recommends /technical-storybook), and auto type recommendation (suggests a layout when none is given) before layout selection. Enters plan mode for component-list approval on multi-component layouts (architecture/workflow ≥5 components, split-panel, process-flow) before writing the full prompt. Also supports a `--from-storyboard <path>` mode where `<path>` is either a single storyboard file (12 prompts) or a series root directory (auto-loops through every chapter subdirectory). Reads the storyboard produced by /technical-storybook and generates one prompt per act in batch. Use when the user says "create a crayon illustration", "hand-drawn diagram", "sketch-style visual", "crayon-style prompt", or "/crayon-illustration". Pairs well with /technical-storybook to generate visuals for each act.
 triggers:
   - "crayon illustration"
   - "hand-drawn diagram"
@@ -28,9 +28,14 @@ Generate a detailed AI image generation prompt in the hand-drawn crayon style fo
 
 ```
 /crayon-illustration <type> "Topic"
+/crayon-illustration "Topic"
+/crayon-illustration --from-storyboard <file>           # one storyboard.md → 12 prompts
+/crayon-illustration --from-storyboard <series-root>    # directory → loop every chapter
 ```
 
 **Types:** `concept-cards`, `mapping`, `architecture`, `workflow`, `grid`, `split-panel`, `process-flow`
+
+`<type>` is optional in the second form (Step 3 recommends one). The third and fourth forms skip discovery entirely and read a storyboard file or directory produced by `/technical-storybook` — see the [Storyboard Mode](#storyboard-mode--alternate-invocation) section below.
 
 ## Workflow
 
@@ -65,10 +70,21 @@ Assess whether the topic is too dense for a single crayon illustration. Evaluate
 4. **System + flow + data + outcomes** — the topic asks for the architecture AND the request flow AND the data model AND the user journey in a single frame
 5. **Comparison across N>5 dimensions** — e.g., "compare 6 caching strategies across 4 properties"
 
-**Decision rule:** if 2+ signals fire, notify the user:
+**Decision rule:** if 2+ signals fire, notify the user with both concrete commands:
 
-> The concept "<topic>" looks too dense for a single crayon illustration. I'd recommend running `/technical-storybook` first to get a 12-act storyboard, then invoke `/crayon-illustration` for each act.
-> Want to (a) hand off to `/technical-storybook`, (b) narrow the topic and stay here, or (c) override and continue with a single image anyway?
+> The concept "`<topic>`" looks too dense for a single crayon illustration. I'd recommend producing a 12-act storyboard first, then rendering each act as its own crayon illustration. Concretely, run these in order:
+>
+> ```
+> /technical-storybook "<topic>"
+> ```
+> → saves the storyboard to `storyboard/<slug>/storyboard.md` (single mode) or `storyboard/<slug>/chapter-N/storyboard.md` (chapter mode)
+>
+> ```
+> /crayon-illustration --from-storyboard storyboard/<slug>/storyboard.md
+> ```
+> → reads the file, generates one prompt per act, saves them to `storyboard/<slug>/act-NN-prompt.md`
+>
+> Want to (a) hand off to `/technical-storybook` now, (b) narrow the topic and stay in single-image mode here, or (c) override and continue with a single dense image anyway?
 
 The user can override and continue; the skill respects the choice. If 0–1 signals fire, proceed directly to Step 3.
 
@@ -140,6 +156,52 @@ See the [Style Requirements](#style-requirements-include-in-every-prompt) and [L
 ### Step 7 — Save and Display
 
 Save the prompt to `img/<slug>-prompt.md` using the [Output Format](#output-format) below. Display the prompt directly to the user for copy-paste. Remind the user to export as **PNG at 1920×1080** and save to `img/<slug>.png`.
+
+## Storyboard Mode — alternate invocation
+
+When invoked as `/crayon-illustration --from-storyboard <path>`, the skill reads a storyboard file produced by `/technical-storybook` (or any compatible methodology skill) and generates one prompt per act in batch.
+
+This is the consumer side of the methodology+style handoff: the storybook produces the file, this skill consumes it. The file format is defined in [`../technical-storybook/references/storyboard-format.md`](../technical-storybook/references/storyboard-format.md) — including the Visual Type Mapping table that says how each storyboard `Visual type` maps to a crayon layout.
+
+### Workflow
+
+1. **Resolve `<path>`.** If `<path>` ends in `.md` or points at a file, treat it as **single-pass mode** — read just that storyboard file. Otherwise treat it as a directory and auto-detect:
+   - If `<path>/storyboard.md` exists → single-pass on that file.
+   - Else glob `<path>/chapter-*/storyboard.md`. Sort the matches numerically by integer N (chapter-1, chapter-2, …, chapter-10 — not lexicographically). Loop through each chapter file as if it were a single-pass invocation. This is **chapter auto-loop mode**.
+   - If neither matches → error: print the expected layouts (single: `<dir>/storyboard.md`; chapter series: `<dir>/chapter-*/storyboard.md`) and exit without writing anything.
+
+   In all modes, parse the storyboard file's YAML frontmatter to extract `concept`, `slug`, `audience`, `expertise`, `takeaway`, and `chapter` position. The directory containing the file is `<storyboard-dir>` — that's where per-act prompts will be written.
+
+2. **Skip Steps 1–3 of the standard workflow.** Discovery is taken from the frontmatter; scope triage is moot (the storybook already produced 12 acts × 1 visual each); type recommendation is moot (each act records its own `Crayon layout`).
+
+3. **For each `### Act NN — <Title>` section in the file**, do the following:
+   - Extract `Title`, `Visual type`, `Crayon layout`, `Visual description`, `Components (L→R)` (if listed), `Arrow labels` (if listed)
+   - If `Crayon layout` is missing, look up the `Visual type` in the Visual Type Mapping table from `storyboard-format.md` and use that
+   - Run Step 6 of the standard workflow (Generate Prompt) using these inputs:
+     - **Audience, takeaway, expertise** → from frontmatter (apply globally to every act)
+     - **Slide context** → `"Per-act visual"` (always)
+     - **Layout type** → the resolved Crayon layout
+     - **Components / arrow labels / sublabels** → from the act section
+     - **Title for the prompt** → the act's `Title` field
+   - Save the prompt to `<storyboard-dir>/act-NN-prompt.md` (NN = zero-padded, matching the act heading)
+
+4. **Skip the Step 5 plan-mode gate.** The storyboard was already approved upstream in `/technical-storybook`'s Step 4 plan-mode gate; the per-act prompts inherit that approval. If the user wants per-act review, they can re-run with `--review-each` and the gate fires per act.
+
+5. **Display a final summary** when prompts are saved:
+   - **Single-pass:** `Generated 12 act prompts at <storyboard-dir>/act-NN-prompt.md. Export each as PNG (1920×1080) and save alongside as act-NN.png.`
+   - **Chapter auto-loop:** One section per chapter listing its 12 prompt paths, then a top-line total: `Generated N×12 prompts across N chapters at storyboard/<slug>/chapter-*/act-NN-prompt.md`. Remind the user to export each as PNG (1920×1080) alongside as `act-NN.png`.
+
+### Chapter mode
+
+When `<path>` is a series root containing `chapter-*/storyboard.md` files, the workflow auto-loops every chapter in numerical order. Each chapter's per-act prompts save to `storyboard/<slug>/chapter-N/act-NN-prompt.md` so they don't collide with sibling chapters.
+
+If the user wants per-chapter approval rather than a full series sweep, they can invoke once per chapter file:
+
+```
+/crayon-illustration --from-storyboard storyboard/<slug>/chapter-1/storyboard.md
+```
+
+The chapter file's frontmatter `chapter.position` and `chapter.total` are parsed and surfaced in the summary so the user knows which chapter just rendered.
 
 ## Style Requirements (Include in EVERY prompt)
 

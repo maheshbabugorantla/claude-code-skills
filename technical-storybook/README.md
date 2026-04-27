@@ -27,7 +27,15 @@ The workflow includes a consulting-style discovery intake (domain research, audi
 
 If the concept is too large for a single 12-illustration storyboard (multiple paradigm shifts, prerequisite stack, compound topic, mixed audiences, or entity/relationship inflation), the skill runs a **scope triage** in Step 1d, notifies you with the specific signals that fired, and offers to break the story into a **chapter series** — each chapter is its own 12-act storyboard (≤12 illustrations) sharing a meta-arc, with one plan-mode gate per chapter. You can accept the chapter series or pick a compressed single storyboard with the tradeoff documented explicitly.
 
-Optionally generates a per-act visual prompt (one per act) compatible with any illustration skill.
+The completed storyboard is **saved to disk** at `storyboard/<slug>/storyboard.md` (single mode) or `storyboard/<slug>/chapter-N/storyboard.md` (chapter mode). The file format is defined in [references/storyboard-format.md](references/storyboard-format.md) and is the contract paired illustration skills consume.
+
+After saving, the skill prints the exact next-step command — for example:
+
+```
+/crayon-illustration --from-storyboard storyboard/<slug>/storyboard.md
+```
+
+The illustration skill reads the file, walks the 12 acts, and writes one prompt per act. The skill itself never invokes another skill silently — the handoff is always a command the user runs deliberately.
 
 ## Pairs well with
 
