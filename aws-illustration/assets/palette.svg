@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 240" width="960" height="240">
+  <rect width="960" height="240" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="480" y="28" font-family="Amazon Ember, Inter, Noto Sans, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#232F3E">AWS 2023 Service Category Palette</text>
+
+  <!-- Swatch 1: Smile - Compute -->
+  <rect x="20" y="50" width="120" height="80" rx="8" fill="#ED7100"/>
+  <text x="80" y="97" font-family="Amazon Ember, Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Smile</text>
+  <text x="80" y="113" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#ED7100</text>
+  <text x="80" y="148" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="#545B64">Compute · Containers</text>
+
+  <!-- Swatch 2: Endor - Storage -->
+  <rect x="160" y="50" width="120" height="80" rx="8" fill="#7AA116"/>
+  <text x="220" y="97" font-family="Amazon Ember, Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Endor</text>
+  <text x="220" y="113" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#7AA116</text>
+  <text x="220" y="148" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="#545B64">Storage · IoT</text>
+
+  <!-- Swatch 3: Cosmos - App Integration / DB -->
+  <rect x="300" y="50" width="120" height="80" rx="8" fill="#E7157B"/>
+  <text x="360" y="97" font-family="Amazon Ember, Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Cosmos</text>
+  <text x="360" y="113" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#E7157B</text>
+  <text x="360" y="148" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="#545B64">App Integration · DB</text>
+
+  <!-- Swatch 4: Galaxy - Analytics / Networking -->
+  <rect x="440" y="50" width="120" height="80" rx="8" fill="#8C4FFF"/>
+  <text x="500" y="97" font-family="Amazon Ember, Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Galaxy</text>
+  <text x="500" y="113" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#8C4FFF</text>
+  <text x="500" y="148" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="#545B64">Analytics · Networking</text>
+
+  <!-- Swatch 5: Mars - Security -->
+  <rect x="580" y="50" width="120" height="80" rx="8" fill="#DD344C"/>
+  <text x="640" y="97" font-family="Amazon Ember, Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Mars</text>
+  <text x="640" y="113" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#DD344C</text>
+  <text x="640" y="148" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="#545B64">Security · Identity</text>
+
+  <!-- Swatch 6: Orbit - AI/ML -->
+  <rect x="720" y="50" width="120" height="80" rx="8" fill="#01A88D"/>
+  <text x="780" y="97" font-family="Amazon Ember, Inter, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Orbit</text>
+  <text x="780" y="113" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#01A88D</text>
+  <text x="780" y="148" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="#545B64">AI/ML · Migration</text>
+
+  <!-- Swatch 7: Brand Colors Row -->
+  <!-- Squid Ink Navy -->
+  <rect x="20" y="175" width="80" height="44" rx="6" fill="#232F3E"/>
+  <text x="60" y="195" font-family="Amazon Ember, Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FFFFFF">Squid Ink</text>
+  <text x="60" y="209" font-family="Amazon Ember, Inter, sans-serif" font-size="10" text-anchor="middle" fill="rgba(255,255,255,0.75)">#232F3E</text>
+
+  <!-- AWS Orange -->
+  <rect x="110" y="175" width="80" height="44" rx="6" fill="#FF9900"/>
+  <text x="150" y="195" font-family="Amazon Ember, Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FFFFFF">AWS Orange</text>
+  <text x="150" y="209" font-family="Amazon Ember, Inter, sans-serif" font-size="10" text-anchor="middle" fill="rgba(255,255,255,0.9)">#FF9900</text>
+
+  <!-- Nebula -->
+  <rect x="200" y="175" width="80" height="44" rx="6" fill="#C925D1"/>
+  <text x="240" y="195" font-family="Amazon Ember, Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FFFFFF">Nebula</text>
+  <text x="240" y="209" font-family="Amazon Ember, Inter, sans-serif" font-size="10" text-anchor="middle" fill="rgba(255,255,255,0.85)">#C925D1</text>
+
+  <!-- Slate / Arrow color -->
+  <rect x="290" y="175" width="80" height="44" rx="6" fill="#545B64"/>
+  <text x="330" y="195" font-family="Amazon Ember, Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FFFFFF">Slate</text>
+  <text x="330" y="209" font-family="Amazon Ember, Inter, sans-serif" font-size="10" text-anchor="middle" fill="rgba(255,255,255,0.85)">#545B64</text>
+
+  <!-- Footer note -->
+  <text x="480" y="232" font-family="Amazon Ember, Inter, sans-serif" font-size="11" text-anchor="middle" fill="#879096">AWS 2023 Architecture Icon Palette — Use as Gemini reference image for color-accurate illustrations</text>
+</svg>
