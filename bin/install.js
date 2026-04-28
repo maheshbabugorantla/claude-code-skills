@@ -11,8 +11,10 @@ const { execSync } = require('child_process');
 // ─── config ──────────────────────────────────────────────────────────────────
 
 const PKG          = require('../package.json');
-const MANIFEST     = '.cc-skills-manifest.json';
-const PATCHES_DIR  = 'cc-skills-patches';
+// derive a filesystem-safe slug from the package name: @scope/name → scope-name
+const PKG_SLUG     = PKG.name.replace(/^@/, '').replace('/', '-');
+const MANIFEST     = `.${PKG_SLUG}-manifest.json`;
+const PATCHES_DIR  = `${PKG_SLUG}-patches`;
 const SKIP_FILES   = new Set(['.npmignore', '.DS_Store']);
 
 const SKILLS = [
