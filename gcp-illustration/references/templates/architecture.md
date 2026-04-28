@@ -90,6 +90,45 @@ NOT pure black background. White text. Pale gray arrows. Aspect ratio 16:9, 1920
 
 ---
 
+## Prompt Template — Two-Lane (Light)
+
+```
+Create a clean Google Cloud two-lane architecture diagram on white (#FFFFFF) background
+showing {{DESCRIPTION}}.
+
+LAYOUT: Two horizontal lanes, stacked top-to-bottom. Each lane has its own label on the
+left edge. All arrows point strictly RIGHT within each lane. Vertical connections
+between lanes (top → bottom) are allowed, but keep them minimal and clearly labeled.
+
+Top lane — "{{TOP_LANE_LABEL}}" (e.g., "Primary data path", "User-facing services"):
+Component 1 → Component 2 → Component 3 {{...}}
+
+Bottom lane — "{{BOTTOM_LANE_LABEL}}" (e.g., "Async / offline", "Observability"):
+Component A → Component B {{...}}
+
+Lane labels: 16px Google Sans bold, Slate (#5F6368), left-aligned on a 1px #DADCE0
+vertical divider separating label column from content.
+
+Arrows within lanes: Slate (#5F6368), 2px, classic arrowhead, point RIGHT.
+Arrows crossing lanes (when present): Slate (#5F6368), 1.5px, dashed, labeled.
+
+Component style (same as single-row):
+- White (#FFFFFF) card, 4px radius, 1px #DADCE0 border.
+- GCP icon in its official category color.
+- Label: 14px Google Sans, #202124.
+- Sublabel: 12px Google Sans, #5F6368.
+
+CONFIRM: Top lane components all at the same y. Bottom lane components all at the same y.
+No component from the top lane drops to the level of the bottom lane or vice versa.
+All horizontal arrows point strictly RIGHT.
+
+Style: Clean Google Cloud two-lane architecture diagram on white (#FFFFFF). Material Design
+aesthetic. Official Google Cloud service icons. FLAT 2D icons. NOT isometric. NOT glass
+morphism. Google Sans font. Slate (#5F6368) arrows. Aspect ratio 16:9, 1920x1080.
+```
+
+---
+
 ## draw.io XML pattern (single row, light)
 
 ```xml

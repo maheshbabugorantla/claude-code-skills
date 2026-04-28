@@ -50,6 +50,49 @@ Aspect ratio 16:9, 1920x1080.
 
 ---
 
+## Prompt Template — Dark Theme
+
+```
+Create a Google Cloud process-flow illustration on Deep Gray (#202124) background showing
+{{DESCRIPTION}} across {{N}} stages.
+
+CRITICAL LAYOUT RULE: All panels arranged on a SINGLE horizontal row left to right.
+All arrows between panels point strictly RIGHT. No arrows point left, down, or diagonally.
+No curved arrows.
+
+Panel design: each panel is a tall vertical rectangle (~240px wide × ~560px tall) with:
+- {{CATEGORY_COLOR}} 4px top accent border (same category color as icon).
+- Dark card (#303134) fill, 1px #5F6368 border, 4px radius.
+- Bold panel title at top in 16px Google Sans, white (#FFFFFF).
+- GCP service icon(s) centered in the panel.
+- Short description text in 13px Google Sans, #9AA0A6.
+
+Panel 1 — "{{PANEL_TITLE_1}}" ({{CATEGORY_COLOR_1}} top border):
+- Icon: {{icon 1}} in {{CATEGORY_COLOR_1}}
+- Service: "{{Service 1}}"
+- Description: "{{desc 1}}"
+
+→ Bold arrow (Pale Gray #9AA0A6, 3px, label "{{arrow label 1→2}}")
+
+Panel 2 — "{{PANEL_TITLE_2}}" ({{CATEGORY_COLOR_2}} top border):
+- Icon: {{icon 2}} in {{CATEGORY_COLOR_2}}
+- Service: "{{Service 2}}"
+- Description: "{{desc 2}}"
+
+→ Bold arrow (label "{{arrow label 2→3}}")
+
+{{...repeat for all N panels...}}
+
+CONFIRM: All {{N}} panels on the same horizontal baseline. All arrows point RIGHT.
+
+Style: Google Cloud process-flow on Deep Gray (#202124) — NOT pure black. Material Design
+dark aesthetic. Official Google Cloud service icons. FLAT 2D icons. NOT isometric.
+NOT glass morphism. NOT neon glows. Bold pale gray arrows with protocol labels.
+Google Sans font. Aspect ratio 16:9, 1920x1080.
+```
+
+---
+
 ## draw.io XML pattern (4 panels, light)
 
 ```xml

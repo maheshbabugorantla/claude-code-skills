@@ -55,6 +55,55 @@ Right panel: summary card with key takeaways. Aspect ratio 16:9, 1920x1080.
 
 ---
 
+## Prompt Template — Dark Theme
+
+```
+Create a Google Cloud split-panel illustration on Deep Gray (#202124) background showing
+{{DESCRIPTION}}.
+
+LAYOUT: Two panels side by side.
+- LEFT PANEL (70% of canvas width): Architecture flow — GCP services left-to-right.
+- RIGHT PANEL (30% of canvas width): Summary card on darker surface.
+- A subtle 1px #5F6368 vertical divider between the two panels.
+
+LEFT PANEL — Architecture flow:
+CRITICAL: All arrows in the left panel point strictly RIGHT. No left/down/diagonal arrows.
+
+{{N}} components in a single horizontal row:
+
+Component 1 (dark card #303134, 1px #5F6368 border, {{CATEGORY_COLOR_1}} icon):
+- GCP icon: {{icon 1}} in {{CATEGORY_COLOR_1}}
+- Label: "{{Service 1}}" in 14px Google Sans, white (#FFFFFF)
+- Sublabel: "{{descriptor 1}}" in 12px #9AA0A6
+
+→ Arrow "{{label 1→2}}" (Pale Gray #9AA0A6) →
+
+Component 2... (same dark-card pattern)
+
+{{...}}
+
+CONFIRM: All {{N}} components on a single horizontal line. All arrows point RIGHT.
+
+RIGHT PANEL — Summary card:
+- Panel background: slightly darker (#1a1b1e or #2d2e30), full height of right panel.
+- Panel title in 22px Google Sans bold, white (#FFFFFF): "{{PANEL_TITLE}}"
+- Google Blue (#4285F4) 2px left border accent on the panel.
+- Up to 5 bullet points in 14px Google Sans, #9AA0A6:
+  • {{bullet 1}}
+  • {{bullet 2}}
+  • {{bullet 3}}
+  • {{bullet 4 (optional)}}
+  • {{bullet 5 (optional)}}
+
+Style: Google Cloud split-panel on Deep Gray (#202124) — NOT pure black. Material Design
+dark aesthetic. Official Google Cloud service icons. FLAT 2D icons. NOT isometric.
+NOT glass morphism. NOT neon glows. Google Sans font. Left panel: architecture with
+Pale Gray (#9AA0A6) arrows. Right panel: summary card with key takeaways.
+Aspect ratio 16:9, 1920x1080.
+```
+
+---
+
 ## draw.io XML pattern
 
 ```xml

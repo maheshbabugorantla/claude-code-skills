@@ -52,20 +52,38 @@ No arrows. No connectors. Aspect ratio 16:9, 1920x1080.
 Create a Google Cloud concept card illustration on Deep Gray (#202124) background
 showing {{DESCRIPTION}}.
 
-Layout: {{N}} horizontal cards left to right. Same width and height. No arrows.
+Layout: {{N}} horizontal cards left to right. All cards the same width and height.
+NO arrows between cards. Each card is self-contained.
 
-Card design:
-- Dark card (#303134) background, 4px radius, 1px #5F6368 border.
+Card design (repeat for each card):
+- Dark card (#303134) background, 4px corner radius, 1px #5F6368 border.
 - {{CATEGORY_COLOR}} 4px top border accent.
-- GCP service icon in {{CATEGORY_COLOR}}, centered top 40%.
-- Title in 16px Google Sans semibold, white (#FFFFFF): "{{Service Name}}"
-- Bullets in 13px Google Sans, #9AA0A6.
+- GCP service icon: {{icon}} in {{CATEGORY_COLOR}} centered in the top 40% of the card.
+- Title below icon in 16px Google Sans semibold, white (#FFFFFF): "{{Service Name}}"
+- 2–3 bullet points in 13px Google Sans regular, #9AA0A6:
+  • {{bullet 1}}
+  • {{bullet 2}}
+  • {{bullet 3 (optional)}}
 
-{{...cards same as light, swap surface colors...}}
+Card 1 ({{CATEGORY_COLOR_1}} top border):
+- Icon: {{icon 1}} in {{CATEGORY_COLOR_1}}
+- Title: "{{Service 1}}"
+- Bullets: {{bullets 1}}
 
-Style: Google Cloud concept cards on Deep Gray (#202124). Material Design dark mode.
-FLAT 2D icons. NOT isometric. NOT glass morphism. NOT pure black. White text.
-Aspect ratio 16:9, 1920x1080.
+Card 2 ({{CATEGORY_COLOR_2}} top border):
+- Icon: {{icon 2}} in {{CATEGORY_COLOR_2}}
+- Title: "{{Service 2}}"
+- Bullets: {{bullets 2}}
+
+{{...repeat for all N cards...}}
+
+Style: Google Cloud concept cards on Deep Gray (#202124) — NOT pure black (#000000).
+Material Design dark aesthetic. Official Google Cloud service icons. FLAT 2D icons.
+NOT isometric. NOT glass morphism. NOT neon glows. Icons in their official Google Cloud
+category colors (Blue #4285F4, Green #34A853, Red #EA4335, Yellow #FBBC04).
+Category-color 4px top accent bars on each card. Dark card surface #303134.
+Google Sans or Roboto font. White (#FFFFFF) card titles. #9AA0A6 bullet text.
+No arrows. No connectors. Aspect ratio 16:9, 1920x1080.
 ```
 
 ---

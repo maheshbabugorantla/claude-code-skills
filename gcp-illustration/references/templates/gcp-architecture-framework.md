@@ -98,6 +98,38 @@ Aspect ratio 16:9, 1920x1080.
 
 ---
 
+## Prompt Template — Dark Theme (N selected pillars)
+
+```
+Create a Google Cloud Architecture Framework illustration on Deep Gray (#202124) background
+showing {{N}} selected pillars as horizontal cards.
+
+Layout: {{N}} cards left-to-right in a horizontal row (or 3×2 grid if N=6). No arrows.
+
+Card design (same for all pillars):
+- Dark card (#303134), 4px radius, 1px #5F6368 border, 280px wide × 360px tall.
+- {{PILLAR_COLOR}} 4px top accent border.
+- GCP service icon representing the pillar: centered, {{PILLAR_COLOR}}, top 40% of card.
+- Pillar name in 18px Google Sans bold, white (#FFFFFF): "{{PILLAR_NAME}}"
+- 3 bullet points in 13px Google Sans, #9AA0A6 describing key practices:
+  • {{practice 1}}
+  • {{practice 2}}
+  • {{practice 3}}
+
+{{...same 6-pillar structure as light theme, with dark card colors...}}
+
+CONFIRM: All {{N}} pillar cards are the same size. No arrows. No connectors.
+The layout is a balanced horizontal row (or 3×2 grid if N=6).
+
+Style: Google Cloud Architecture Framework on Deep Gray (#202124) — NOT pure black.
+Material Design dark aesthetic. Official Google Cloud service icons. FLAT 2D icons.
+NOT isometric. NOT glass morphism. NOT neon glows. Google Sans font.
+Google Blue (#4285F4) pillar accent colors (except Cost = Yellow, Sustainability = Green).
+White text. Pale gray descriptions. Aspect ratio 16:9, 1920x1080.
+```
+
+---
+
 ## draw.io XML pattern (3 pillars, light)
 
 ```xml

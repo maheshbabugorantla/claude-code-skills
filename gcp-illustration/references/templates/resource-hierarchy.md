@@ -81,6 +81,54 @@ Aspect ratio 16:9 preferred; adjust pageHeight to fit content.
 
 ---
 
+## Prompt Template — Dark Theme (single org, 2 folders, 2 projects each)
+
+```
+Create a Google Cloud Resource Hierarchy illustration on Deep Gray (#202124) background
+showing {{DESCRIPTION}}.
+
+Layout: Top-to-bottom tree. Organization at the top center. Folders arranged horizontally
+below Organization. Projects arranged below their parent Folder. Representative resources
+below Projects. ALL connectors are RIGHT-ANGLE lines (orthogonal). No diagonal lines. No
+curved lines.
+
+HIERARCHY (strict top-to-bottom order — NEVER invert):
+Level 1 — ORGANIZATION (top center):
+- Icon: Cloud Resource Manager icon in Pale Gray (#9AA0A6)
+- Label: "{{ORG_NAME}}" (e.g., "acme.com"), white (#FFFFFF)
+- Below label: "Organization" in #9AA0A6
+
+Level 2 — FOLDERS (horizontal row below Organization):
+Folder A (left): Google Blue (#4285F4) folder icon. Dark card (#303134), Blue border. Label: "{{FOLDER_A_NAME}}" in white.
+Folder B (right): Google Blue (#4285F4) folder icon. Dark card (#303134), Blue border. Label: "{{FOLDER_B_NAME}}" in white.
+Right-angle connectors (#5F6368) from Organization down to each Folder.
+
+Level 3 — PROJECTS (below their parent Folder):
+Under Folder A:
+  Project 1: Dark card (#303134), 1px #4285F4 border. Label: "{{PROJECT_1_NAME}}" in white.
+  Project 2: Dark card (#303134), 1px #4285F4 border. Label: "{{PROJECT_2_NAME}}" in white.
+Under Folder B:
+  Project 3: Dark card (#303134), 1px #4285F4 border. Label: "{{PROJECT_3_NAME}}" in white.
+  Project 4: Dark card (#303134), 1px #4285F4 border. Label: "{{PROJECT_4_NAME}}" in white.
+Right-angle connectors (#5F6368) from each Folder down to its Projects.
+
+Level 4 — RESOURCES (below each Project, small icon row):
+Same as light theme — official GCP service icons in their category colors.
+Right-angle connectors (#5F6368) from Projects down to their resource rows.
+
+CONFIRM: Organization is the ROOT (highest level). Folders are BELOW Organization.
+Projects are BELOW Folders. Resources are BELOW Projects.
+NO Folder is drawn as a child of a Project. ALL connectors are right-angle lines.
+Background: Deep Gray (#202124) — NOT pure black (#000000).
+
+Style: Google Cloud Resource Hierarchy on Deep Gray (#202124) dark background.
+Material Design dark aesthetic. Official GCP service icons. FLAT 2D icons. NOT isometric.
+NOT glass morphism. NOT neon glows. Right-angle connectors. Google Sans font.
+Aspect ratio 16:9 preferred; adjust pageHeight to fit content.
+```
+
+---
+
 ## draw.io XML pattern (org → 2 folders → 2 projects each)
 
 ```xml

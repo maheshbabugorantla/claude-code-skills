@@ -39,6 +39,38 @@ Aspect ratio 16:9, 1920x1080.
 
 ---
 
+## Prompt Template — Dark Theme
+
+```
+Create a Google Cloud concept mapping illustration on Deep Gray (#202124) background
+showing {{DESCRIPTION}}: mapping {{LEFT_LABEL}} on the left to {{RIGHT_LABEL}} on the right.
+
+Layout: Two vertical columns. Left column: {{N}} source items. Right column: {{N}} target
+GCP services. Dotted horizontal connectors between each matching pair.
+
+Left column header (bold, 18px Google Sans, white #FFFFFF): "{{LEFT_LABEL}}"
+Right column header (bold, 18px Google Sans, white #FFFFFF): "{{RIGHT_LABEL}}"
+
+Left item {{N}} (dark pill #303134, border #5F6368, 4px radius):
+- Text label: "{{left item N}}" in 14px Google Sans, white (#FFFFFF)
+
+Right item {{N}} (dark card #303134, category-color left border, 4px radius):
+- GCP icon: {{icon N}} in {{CATEGORY_COLOR_N}}
+- Label: "{{Service N}}" in 14px Google Sans semibold, white (#FFFFFF)
+- Sublabel: "{{short equivalence note}}" in 12px #9AA0A6
+
+Connector: dotted 1px #5F6368 line between Left {{N}} and Right {{N}}.
+
+{{...repeat for all N pairs...}}
+
+Style: Mapping diagram on Deep Gray (#202124) — NOT pure black. Material Design dark
+aesthetic. Official Google Cloud service icons. FLAT 2D icons. NOT isometric.
+NOT glass morphism. Dotted gray connectors only — no filled arrowheads. Google Sans font.
+Aspect ratio 16:9, 1920x1080.
+```
+
+---
+
 ## draw.io XML pattern (3 rows, light)
 
 ```xml

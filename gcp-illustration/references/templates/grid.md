@@ -40,6 +40,41 @@ Aspect ratio 16:9, 1920x1080.
 
 ---
 
+## Prompt Template — Dark Theme
+
+```
+Create a Google Cloud service grid illustration on Deep Gray (#202124) background showing
+{{DESCRIPTION}}.
+
+Layout: {{ROWS}} rows × {{COLS}} columns grid of service cards. All cards the same
+size. No arrows. No connectors between cards.
+
+Card design (all cards):
+- Dark card (#303134), 4px radius, 1px #5F6368 border.
+- Category-color 4px top accent bar.
+- GCP service icon centered, top 50% of card, in its official Google Cloud category color.
+- Service name below icon: {{size}}px Google Sans semibold, white (#FFFFFF).
+- Short description: 12px Google Sans, #9AA0A6.
+
+Row 1:
+  Card (1,1): {{CATEGORY_COLOR_1}} top accent. Icon {{icon}} in {{COLOR_1}}. Name: "{{Service}}". Desc: "{{desc}}"
+  Card (1,2): {{CATEGORY_COLOR_2}} top accent. Icon {{icon}} in {{COLOR_2}}. Name: "{{Service}}". Desc: "{{desc}}"
+  {{...}}
+
+Row 2:
+  {{...}}
+
+Style: Google Cloud service grid on Deep Gray (#202124) — NOT pure black. Material Design
+dark aesthetic. Official Google Cloud service icons. FLAT 2D icons. NOT isometric.
+NOT glass morphism. NOT neon glows. Google Sans font. Category-color top accent bars on
+each card. Each icon in its official Google Cloud category color (Blue #4285F4 for
+Compute/Networking/Security/AI, Green #34A853 for Storage/Serverless, Red #EA4335
+for Database, Yellow #FBBC04 for Analytics). White text.
+Aspect ratio 16:9, 1920x1080.
+```
+
+---
+
 ## draw.io XML pattern (2×3 grid, light)
 
 ```xml

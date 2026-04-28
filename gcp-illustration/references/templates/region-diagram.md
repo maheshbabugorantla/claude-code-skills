@@ -85,6 +85,49 @@ Same boundary rules. Aspect ratio 16:9, 1920x1080.
 
 ---
 
+## Prompt Template — Single Region, Dark Theme
+
+```
+Create a Google Cloud region diagram on Deep Gray (#202124) background showing
+{{DESCRIPTION}}.
+
+BOUNDARY RULES — same 3 distinct border styles, adapted for dark mode:
+1. VPC Network boundary: SOLID 2px Google Blue (#4285F4) outer box — label "VPC Network: {{VPC_NAME}}".
+2. Region boundary: DASHED 1px Pale Gray (#9AA0A6) box inside the VPC — label "{{REGION_NAME}}".
+3. Zone boundaries: DOTTED (short dashes) 1px Slate (#5F6368) boxes inside the Region.
+   Zones are stacked VERTICALLY: Zone {{REGION}}-a is in the TOP ROW. Zone {{REGION}}-b is in the BOTTOM ROW.
+   They are NOT side by side horizontally.
+
+INTERNET / ENTRY POINT (outside VPC, to the left):
+- User/Internet icon labeled "Internet" with an arrow pointing RIGHT into the VPC.
+- Cloud Load Balancing icon at the VPC left edge, white label "Cloud Load Balancing" — global resource.
+
+INSIDE VPC → INSIDE {{REGION_NAME}} REGION:
+Zone {{REGION}}-a (TOP zone):
+{{...services in top zone — icons in their official GCP category colors, white labels...}}
+
+Zone {{REGION}}-b (BOTTOM zone — directly below Zone A):
+{{...services in bottom zone...}}
+
+GOOGLE-MANAGED SERVICES OUTSIDE VPC (dotted #5F6368 connection):
+{{...list managed services and their connection label...}}
+
+CONFIRM:
+- VPC is the OUTER boundary (solid Blue #4285F4). ONE VPC wraps the region.
+- Region is INSIDE the VPC (dashed Pale Gray #9AA0A6).
+- Zone A is the TOP box. Zone B is the BOTTOM box. They are STACKED VERTICALLY.
+- Cloud Load Balancing, Pub/Sub, Cloud Storage, BigQuery sit OUTSIDE the VPC or at VPC edge.
+- Background: Deep Gray (#202124) — NOT pure black (#000000).
+
+Style: Google Cloud region diagram on Deep Gray (#202124) dark background. Material Design
+dark aesthetic. Official Google Cloud service icons. FLAT 2D icons. NOT isometric.
+NOT glass morphism. NOT neon glows. Three distinct boundary styles (solid Blue VPC /
+dashed Pale Gray region / dotted Slate zone). White (#FFFFFF) labels. Pale Gray
+(#9AA0A6) arrows. Google Sans font. Aspect ratio 16:9, 1920x1080.
+```
+
+---
+
 ## draw.io XML pattern (single region, 2 zones, light)
 
 ```xml

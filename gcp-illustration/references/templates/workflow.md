@@ -51,18 +51,41 @@ Aspect ratio 16:9, 1920x1080.
 ## Prompt Template — Dark Theme
 
 ```
-Create a Google Cloud workflow diagram on Deep Gray (#202124) showing the
-{{WORKFLOW_NAME}} pipeline.
+Create a Google Cloud workflow diagram on Deep Gray (#202124) background showing the
+{{WORKFLOW_NAME}} pipeline with {{N}} phases.
 
-Same phase structure as light theme, with dark card surfaces:
-- Card: dark (#303134), 1px #5F6368 border.
-- Phase label: #9AA0A6 uppercase.
-- Service label: white (#FFFFFF).
-- Sublabel: #9AA0A6.
-- Arrows: Pale gray (#9AA0A6), 2px.
+CRITICAL LAYOUT RULE: All phases arranged on a SINGLE horizontal row left to right.
+All arrows point strictly RIGHT. No arrows point left, down, or diagonally.
+No curved arrows.
 
-CRITICAL: All arrows point strictly RIGHT. NOT pure black background (#202124). 
-FLAT 2D icons. NOT isometric. NOT glass morphism. NOT neon glows.
+Phases (each is a tall rectangular card with phase label above and service icon below):
+
+Phase 1 — {{PHASE_LABEL_1}} ({{CATEGORY_COLOR_1}} top accent):
+- Card: dark (#303134), 1px #5F6368 border, 4px radius, ~240px wide × ~320px tall.
+- Phase label above card in 12px Google Sans uppercase, #9AA0A6: "{{PHASE_LABEL_1}}"
+- GCP icon centered in card: {{icon 1}} in {{CATEGORY_COLOR_1}}
+- Service label below icon in 16px Google Sans semibold, white (#FFFFFF): "{{Service 1}}"
+- Sublabel in 13px Google Sans, #9AA0A6: "{{descriptor 1}}"
+
+→ Arrow (Pale Gray #9AA0A6, 3px, bold arrowhead, label "{{arrow label 1→2}}")
+
+Phase 2 — {{PHASE_LABEL_2}}:
+- Same dark card structure, {{CATEGORY_COLOR_2}} accent.
+- Icon: {{icon 2}} in {{CATEGORY_COLOR_2}}
+- Label: "{{Service 2}}"
+- Sublabel: "{{descriptor 2}}"
+
+→ Arrow (label "{{arrow label 2→3}}")
+
+{{...repeat for all N phases...}}
+
+CONFIRM: All {{N}} phase cards on the same horizontal baseline. All arrows point RIGHT.
+Background: Deep Gray (#202124) — NOT pure black (#000000).
+
+Style: Google Cloud workflow diagram on Deep Gray (#202124) dark background. Material Design
+dark aesthetic. Official Google Cloud service icons. FLAT 2D icons. NOT isometric.
+NOT glass morphism. NOT neon glows. Bold phase-label text above each card.
+Google Sans font. Pale Gray (#9AA0A6) arrows and sublabels. White titles.
 Aspect ratio 16:9, 1920x1080.
 ```
 
