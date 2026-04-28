@@ -1,6 +1,6 @@
 # cc-skills
 
-Three Claude Code skills — AWS architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — installable in one command.
+Four Claude Code skills — AWS & GCP architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — installable in one command.
 
 ## Install
 
@@ -8,13 +8,14 @@ Three Claude Code skills — AWS architecture illustrations, crayon-style diagra
 npx @maheshbabugorantla/cc-skills@latest --global
 ```
 
-Restart Claude Code after installing. All three skills appear in `/help`.
+Restart Claude Code after installing. All four skills appear in `/help`.
 
 ## Skills
 
 | Skill | Invoke | What it does |
 |---|---|---|
 | `aws-illustration` | `/aws-illustration` | Generates a Gemini AI image prompt + draw.io XML using `mxgraph.aws4` stencils. Dual light/dark themes, 10 illustration types, full 2023 AWS service-category palette. |
+| `gcp-illustration` | `/gcp-illustration` | Generates a Gemini AI image prompt + draw.io XML using `mxgraph.gcp2` stencils. Material design aesthetic, Google Cloud core color palette. |
 | `crayon-illustration` | `/crayon-illustration` | Generates a hand-drawn crayon-style illustration prompt for Gemini, DALL-E, or Midjourney. 7 layout types for technical concepts. |
 | `technical-storybook` | `/technical-storybook` | Designs 12-act narrative storyboards that teach technical concepts through contrastive argumentation. Pairs with `/crayon-illustration` for per-act visuals. |
 

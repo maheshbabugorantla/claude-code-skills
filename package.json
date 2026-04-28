@@ -1,13 +1,14 @@
 {
   "name": "@maheshbabugorantla/cc-skills",
   "version": "1.0.0",
-  "description": "AWS architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — three Claude Code skills installable via npx",
+  "description": "AWS & GCP architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — four Claude Code skills installable via npx",
   "bin": {
     "cc-skills": "./bin/install.js"
   },
   "files": [
     "bin",
     "aws-illustration",
+    "gcp-illustration",
     "crayon-illustration",
     "technical-storybook"
   ],
@@ -19,6 +20,8 @@
     "claude",
     "skills",
     "aws",
+    "gcp",
+    "google-cloud",
     "illustration",
     "storybook",
     "diagram"

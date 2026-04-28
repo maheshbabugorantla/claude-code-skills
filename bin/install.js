@@ -11,7 +11,7 @@ const { execSync } = require('child_process');
 // ─── config ──────────────────────────────────────────────────────────────────
 
 const PKG          = require('../package.json');
-const SKILLS       = ['aws-illustration', 'crayon-illustration', 'technical-storybook'];
+const SKILLS       = ['aws-illustration', 'gcp-illustration', 'crayon-illustration', 'technical-storybook'];
 const MANIFEST     = '.cc-skills-manifest.json';
 const PATCHES_DIR  = 'cc-skills-patches';
 const SKIP_FILES   = new Set(['.npmignore', '.DS_Store']);
