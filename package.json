@@ -1,9 +1,9 @@
 {
-  "name": "@maheshbabugorantla/cc-skills",
+  "name": "claude-code-skills",
   "version": "1.0.0",
   "description": "AWS & GCP architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — four Claude Code skills installable via npx",
   "bin": {
-    "cc-skills": "./bin/install.js"
+    "claude-code-skills": "./bin/install.js"
   },
   "files": [
     "bin",
@@ -30,10 +30,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maheshbabugorantla/cc-skills.git"
+    "url": "git+https://github.com/maheshbabugorantla/claude-code-skills.git"
   },
   "bugs": {
-    "url": "https://github.com/maheshbabugorantla/cc-skills/issues"
+    "url": "https://github.com/maheshbabugorantla/claude-code-skills/issues"
   },
-  "homepage": "https://github.com/maheshbabugorantla/cc-skills#readme"
+  "homepage": "https://github.com/maheshbabugorantla/claude-code-skills#readme"
 }

@@ -1,11 +1,11 @@
-# cc-skills
+# claude-code-skills
 
 Four Claude Code skills — AWS & GCP architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — installable in one command.
 
 ## Install
 
 ```bash
-npx @maheshbabugorantla/cc-skills@latest --global
+npx claude-code-skills@latest --global
 ```
 
 Restart Claude Code after installing. All four skills appear in `/help`.
@@ -22,35 +22,48 @@ Restart Claude Code after installing. All four skills appear in `/help`.
 ## Requirements
 
 - **Node.js ≥ 20** (installer only — not needed at runtime)
-- **`jq`** — required by `aws-illustration`'s service-lookup script
+- **`jq`** — required by `aws-illustration` and `gcp-illustration` service-lookup scripts
 
   ```bash
   brew install jq           # macOS
   sudo apt-get install jq   # Ubuntu / Debian
   ```
 
+## Install specific skills
+
+```bash
+npx claude-code-skills@latest --global aws-illustration
+npx claude-code-skills@latest --global aws-illustration gcp-illustration
+npx claude-code-skills@latest --list
+```
+
 ## Update
 
 Same command — always pulls the latest:
 
 ```bash
-npx @maheshbabugorantla/cc-skills@latest --global
+npx claude-code-skills@latest --global
 ```
 
 ## Uninstall
 
 ```bash
-npx @maheshbabugorantla/cc-skills --uninstall --global
+npx claude-code-skills --uninstall --global
+npx claude-code-skills --uninstall --global aws-illustration
 ```
 
 ## CLI reference
 
 ```
-npx @maheshbabugorantla/cc-skills [options]
+npx claude-code-skills [skill...] [options]
+
+Arguments:
+  skill                 One or more skill names to install (default: all)
 
 Options:
   --global, -g          Install to ~/.claude/skills/  (default when non-interactive)
   --local, -l           Install to ./.claude/skills/  (current project only)
+  --list                List all available skills
   --uninstall, -u       Remove installed skills
   --force, -f           Skip confirmation prompt (for --uninstall)
   --prefix              Install as /mb-aws-illustration etc. (avoids name collisions

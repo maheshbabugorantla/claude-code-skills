@@ -44,5 +44,5 @@ The first command saves a storyboard file; the second reads it and generates one
 ## Install
 
 ```bash
-npx @maheshbabugorantla/cc-skills@latest --global
+npx claude-code-skills@latest --global
 ```
