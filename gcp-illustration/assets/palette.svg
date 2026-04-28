@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 240" width="960" height="240">
+  <rect width="960" height="240" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="480" y="28" font-family="Google Sans, Roboto, Inter, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#202124">Google Cloud Architecture Icon Palette</text>
+
+  <!-- Swatch 1: Google Blue - Compute / Networking / Security -->
+  <rect x="20" y="50" width="220" height="80" rx="8" fill="#4285F4"/>
+  <text x="130" y="92" font-family="Google Sans, Roboto, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Google Blue</text>
+  <text x="130" y="108" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#4285F4</text>
+  <text x="130" y="148" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="#5F6368">Compute · Networking · Security · AI/ML</text>
+
+  <!-- Swatch 2: Google Green - Storage / Serverless -->
+  <rect x="260" y="50" width="220" height="80" rx="8" fill="#34A853"/>
+  <text x="370" y="92" font-family="Google Sans, Roboto, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Google Green</text>
+  <text x="370" y="108" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#34A853</text>
+  <text x="370" y="148" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="#5F6368">Storage · Serverless</text>
+
+  <!-- Swatch 3: Google Red - Databases / CI-CD -->
+  <rect x="500" y="50" width="220" height="80" rx="8" fill="#EA4335"/>
+  <text x="610" y="92" font-family="Google Sans, Roboto, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF">Google Red</text>
+  <text x="610" y="108" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="rgba(255,255,255,0.85)">#EA4335</text>
+  <text x="610" y="148" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="#5F6368">Databases · CI/CD</text>
+
+  <!-- Swatch 4: Google Yellow - Analytics / Big Data -->
+  <rect x="740" y="50" width="200" height="80" rx="8" fill="#FBBC04"/>
+  <text x="840" y="92" font-family="Google Sans, Roboto, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#202124">Google Yellow</text>
+  <text x="840" y="108" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="rgba(32,33,36,0.7)">#FBBC04</text>
+  <text x="840" y="148" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="#5F6368">Analytics · Big Data</text>
+
+  <!-- Brand neutrals row -->
+  <!-- Deep Gray (Material dark mode bg) -->
+  <rect x="20" y="175" width="100" height="44" rx="6" fill="#202124"/>
+  <text x="70" y="195" font-family="Google Sans, Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FFFFFF">Deep Gray</text>
+  <text x="70" y="209" font-family="Google Sans, Roboto, sans-serif" font-size="10" text-anchor="middle" fill="rgba(255,255,255,0.75)">#202124</text>
+
+  <!-- Slate (body text / arrow color light) -->
+  <rect x="130" y="175" width="100" height="44" rx="6" fill="#5F6368"/>
+  <text x="180" y="195" font-family="Google Sans, Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FFFFFF">Slate</text>
+  <text x="180" y="209" font-family="Google Sans, Roboto, sans-serif" font-size="10" text-anchor="middle" fill="rgba(255,255,255,0.85)">#5F6368</text>
+
+  <!-- Light Gray (card surface) -->
+  <rect x="240" y="175" width="100" height="44" rx="6" fill="#F1F3F4" stroke="#DADCE0" stroke-width="1"/>
+  <text x="290" y="195" font-family="Google Sans, Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#202124">Light Gray</text>
+  <text x="290" y="209" font-family="Google Sans, Roboto, sans-serif" font-size="10" text-anchor="middle" fill="#5F6368">#F1F3F4</text>
+
+  <!-- Card border (light) -->
+  <rect x="350" y="175" width="100" height="44" rx="6" fill="#FFFFFF" stroke="#DADCE0" stroke-width="2"/>
+  <text x="400" y="195" font-family="Google Sans, Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#202124">Border</text>
+  <text x="400" y="209" font-family="Google Sans, Roboto, sans-serif" font-size="10" text-anchor="middle" fill="#5F6368">#DADCE0</text>
+
+  <!-- Dark card surface -->
+  <rect x="460" y="175" width="100" height="44" rx="6" fill="#303134" stroke="#5F6368" stroke-width="1"/>
+  <text x="510" y="195" font-family="Google Sans, Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#FFFFFF">Dark Card</text>
+  <text x="510" y="209" font-family="Google Sans, Roboto, sans-serif" font-size="10" text-anchor="middle" fill="rgba(255,255,255,0.75)">#303134</text>
+
+  <!-- Dark text / arrows -->
+  <rect x="570" y="175" width="100" height="44" rx="6" fill="#9AA0A6"/>
+  <text x="620" y="195" font-family="Google Sans, Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#202124">Pale Gray</text>
+  <text x="620" y="209" font-family="Google Sans, Roboto, sans-serif" font-size="10" text-anchor="middle" fill="rgba(32,33,36,0.7)">#9AA0A6</text>
+
+  <!-- Footer note -->
+  <text x="480" y="232" font-family="Google Sans, Roboto, sans-serif" font-size="11" text-anchor="middle" fill="#5F6368">Google Cloud Architecture Icon Palette — Use as Gemini reference image for color-accurate illustrations</text>
+</svg>
