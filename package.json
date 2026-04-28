@@ -1,9 +1,9 @@
 {
-  "name": "claude-code-skills",
+  "name": "mbg-claude-code-skills",
   "version": "1.0.0",
   "description": "AWS & GCP architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — four Claude Code skills installable via npx",
   "bin": {
-    "claude-code-skills": "./bin/install.js"
+    "mbg-claude-code-skills": "./bin/install.js"
   },
   "files": [
     "bin",

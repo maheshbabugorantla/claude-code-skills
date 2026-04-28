@@ -48,5 +48,5 @@ The storyboard methodology works standalone (text only) or paired with any illus
 ## Install
 
 ```bash
-npx claude-code-skills@latest --global
+npx mbg-claude-code-skills@latest --global
 ```

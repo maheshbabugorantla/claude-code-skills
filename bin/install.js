@@ -212,7 +212,7 @@ function install(isGlobal, skillIds) {
   const pkgDir    = path.join(__dirname, '..');
 
   const scope = skillIds.length === SKILL_IDS.length ? 'all skills' : `${skillIds.length} skill(s)`;
-  console.log(`\n${bold}claude-code-skills${reset} ${dim}v${PKG.version}${reset}  ${dim}— installing ${scope}${reset}\n`);
+  console.log(`\n${bold}mbg-claude-code-skills${reset} ${dim}v${PKG.version}${reset}  ${dim}— installing ${scope}${reset}\n`);
   console.log(`  ${dim}→ ${configDir}/skills/${reset}\n`);
 
   // on upgrade: detect user-modified files and back them up before wiping
@@ -291,7 +291,7 @@ function uninstall(isGlobal, skillIds) {
     return;
   }
 
-  console.log(`\n${bold}Uninstall claude-code-skills${reset} from ${dim}${configDir}${reset}\n`);
+  console.log(`\n${bold}Uninstall mbg-claude-code-skills${reset} from ${dim}${configDir}${reset}\n`);
   for (const p of skillDirs) console.log(`  ${dim}remove  skills/${path.basename(p)}${reset}`);
   if (removingAll && fs.existsSync(manifestP))  console.log(`  ${dim}remove  ${MANIFEST}${reset}`);
   if (removingAll && fs.existsSync(patchDir))   console.log(`  ${dim}remove  ${PATCHES_DIR}/${reset}`);
@@ -375,7 +375,7 @@ function promptSkills(callback) {
 }
 
 function promptLocation(skillIds) {
-  console.log(`\n${bold}claude-code-skills${reset} ${dim}v${PKG.version}${reset}\n`);
+  console.log(`\n${bold}mbg-claude-code-skills${reset} ${dim}v${PKG.version}${reset}\n`);
   console.log(`  ${cyan}1${reset}  Global  ${dim}~/.claude/skills/${reset}  ${dim}(all projects — recommended)${reset}`);
   console.log(`  ${cyan}2${reset}  Local   ${dim}./.claude/skills/${reset}  ${dim}(this project only)${reset}\n`);
 

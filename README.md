@@ -1,11 +1,11 @@
-# claude-code-skills
+# mbg-claude-code-skills
 
 Four Claude Code skills — AWS & GCP architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — installable in one command.
 
 ## Install
 
 ```bash
-npx claude-code-skills@latest --global
+npx mbg-claude-code-skills@latest --global
 ```
 
 Restart Claude Code after installing. All four skills appear in `/help`.
@@ -32,9 +32,9 @@ Restart Claude Code after installing. All four skills appear in `/help`.
 ## Install specific skills
 
 ```bash
-npx claude-code-skills@latest --global aws-illustration
-npx claude-code-skills@latest --global aws-illustration gcp-illustration
-npx claude-code-skills@latest --list
+npx mbg-claude-code-skills@latest --global aws-illustration
+npx mbg-claude-code-skills@latest --global aws-illustration gcp-illustration
+npx mbg-claude-code-skills@latest --list
 ```
 
 ## Update
@@ -42,20 +42,20 @@ npx claude-code-skills@latest --list
 Same command — always pulls the latest:
 
 ```bash
-npx claude-code-skills@latest --global
+npx mbg-claude-code-skills@latest --global
 ```
 
 ## Uninstall
 
 ```bash
-npx claude-code-skills --uninstall --global
-npx claude-code-skills --uninstall --global aws-illustration
+npx mbg-claude-code-skills --uninstall --global
+npx mbg-claude-code-skills --uninstall --global aws-illustration
 ```
 
 ## CLI reference
 
 ```
-npx claude-code-skills [skill...] [options]
+npx mbg-claude-code-skills [skill...] [options]
 
 Arguments:
   skill                 One or more skill names to install (default: all)
