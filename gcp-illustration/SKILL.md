@@ -197,34 +197,50 @@ Design spec: read `DESIGN.md` (colocated in this skill folder) for the authorita
 ```
 Style: Clean Google Cloud architecture diagram on a white (#FFFFFF) background.
 Material Design aesthetic — NOT isometric, NOT glass morphism, NOT dark mode.
-FLAT 2D icons only. Service icons in their official Google Cloud category colors:
-Compute/Networking/Security/AI icons in Google Blue (#4285F4), Storage icons in
-Google Green (#34A853), Database icons in Google Red (#EA4335), Analytics icons
-in Google Yellow (#FBBC04), Management icons in Slate (#5F6368).
+FLAT 2D icons only. No 3D perspective. No gradient fills on service icons.
+Service icons in their official Google Cloud category colors: Compute, Networking,
+Security, and AI/ML icons in Google Blue (#4285F4); Storage and Serverless icons
+in Google Green (#34A853); Database icons in Google Red (#EA4335); Analytics and
+Big Data icons in Google Yellow (#FBBC04); Management and Operations icons in Slate
+(#5F6368). Each icon color communicates its service category — do not override.
 Label every service with its official Google Cloud marketing name — "Cloud Storage",
 "Google Kubernetes Engine", "Cloud Run", "BigQuery", "Cloud SQL", "Pub/Sub",
-"Vertex AI", "Firestore". Never shorten to bare "GCS", "GKE", "Cloud Firestore",
-"Big Query" (two words), or "PubSub".
-Text in Google Sans or Roboto (clean geometric humanist sans-serif).
-Slate (#5F6368) arrows, 1.5px weight, classic arrowhead.
-VPC boundary solid Blue (#4285F4). Region boundary dashed Slate (#5F6368).
-Zone boundary dotted Pale Gray (#9AA0A6). Zones stacked VERTICALLY.
-Aspect ratio 16:9, 1920x1080.
+"Vertex AI", "Firestore", "Cloud Load Balancing", "Cloud Spanner", "Dataflow",
+"Artifact Registry". Never shorten to bare "GCS", "GKE", "Cloud Firestore",
+"Big Query" (two words), "PubSub", or "Container Registry" (deprecated).
+Use Google Sans or Roboto — clean geometric humanist sans-serif with open apertures
+and uniform stroke weight. Not condensed. Not a serif. Not monospace.
+Slate (#5F6368) arrows, 1.5px weight, classic filled arrowhead. White (#FFFFFF) card
+backgrounds, 1px #DADCE0 borders, 4px corner radius. All arrows point strictly
+LEFT to RIGHT in horizontal flows — never reversed, never diagonal, never curved.
+For region diagrams: VPC boundary solid Blue (#4285F4), Region boundary dashed Slate
+(#5F6368), Zone boundary dotted Pale Gray (#9AA0A6). Zones stacked VERTICALLY —
+Zone A on top, Zone B below — never side by side.
+Google Cloud architecture diagram style. Aspect ratio 16:9, 1920x1080.
 ```
 
 ### Dark theme:
 ```
 Style: Google Cloud Next keynote-style illustration on Deep Gray (#202124) background.
 Material Design dark aesthetic — flat icons, NO glass morphism, NO neon glows,
-NOT isometric. FLAT 2D icons only. Service icons in their official Google Cloud
-category colors (Blue #4285F4, Green #34A853, Red #EA4335, Yellow #FBBC04).
-White (#FFFFFF) text. Pale Gray (#9AA0A6) arrows. Deep Gray (#202124) background —
-NOT pure black (#000000). Dark card surface: #303134, 1px #5F6368 border.
-Category-color 4px top border on cards.
+NOT isometric, NO 3D perspective. FLAT 2D icons only. No gradient fills.
+Deep Gray (#202124) background — NOT pure black (#000000). There is a meaningful
+difference: Deep Gray has a subtle warm undertone; pure black looks harsh and
+unbranded. Dark card surface: #303134. Card border: 1px #5F6368. Category-color
+4px top accent bar on cards instead of drop shadows (drop shadows disappear on dark
+backgrounds and are not current GCP style).
+Service icons in their official Google Cloud category colors: Compute/Networking/
+Security/AI in Google Blue (#4285F4), Storage/Serverless in Google Green (#34A853),
+Database in Google Red (#EA4335), Analytics in Google Yellow (#FBBC04), Management
+in Slate (#5F6368). Icon colors are the same as light mode — they are bright enough
+to read on Deep Gray without modification.
+White (#FFFFFF) primary text for service labels and titles.
+Pale Gray (#9AA0A6) arrows (1.5px, classic arrowhead) and secondary/sublabel text.
 Label every service with its official Google Cloud marketing name — "Cloud Storage",
 "Google Kubernetes Engine", "Cloud Run", "BigQuery", "Cloud SQL", "Pub/Sub",
 "Vertex AI", "Firestore". Never shorten to bare "GCS", "GKE", or "PubSub".
-Aspect ratio 16:9, 1920x1080.
+Font: Google Sans or Roboto. All arrows point strictly LEFT to RIGHT.
+Google Cloud Next keynote illustration style. Aspect ratio 16:9, 1920x1080.
 ```
 
 ---
