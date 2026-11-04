@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+# Runs the playable-statechart CLI with the checks the SKILL.md asks for.
+set -eu
+HERE=$(cd "$(dirname "$0")/.." && pwd)
+SCRIPTS="$HERE/scripts"
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "playable-statechart: node not found (need Node >= 22.18)" >&2; exit 2
+fi
+NODE_V=$(node -p 'process.versions.node')
+MAJOR=${NODE_V%%.*}; REST=${NODE_V#*.}; MINOR=${REST%%.*}
+if [ "$MAJOR" -lt 22 ] || { [ "$MAJOR" -eq 22 ] && [ "$MINOR" -lt 18 ]; }; then
+  echo "playable-statechart: Node $NODE_V is too old; need >= 22.18 (runs TypeScript without a build step)" >&2; exit 2
+fi
+if [ ! -d "$SCRIPTS/node_modules" ]; then
+  echo "playable-statechart: first run — installing layout/drawing dependencies into scripts/ ..." >&2
+  (cd "$SCRIPTS" && npm install --silent)
+fi
+exec node "$SCRIPTS/cli.ts" "$@"

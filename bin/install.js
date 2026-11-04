@@ -22,6 +22,7 @@ const SKILLS = [
   { id: 'gcp-illustration',    desc: 'Google Cloud diagrams (mxgraph.gcp2, light/dark)' },
   { id: 'crayon-illustration', desc: 'Hand-drawn style illustration prompts (7 layout types)' },
   { id: 'technical-storybook', desc: '12-act narrative storyboards for technical concepts' },
+  { id: 'playable-statechart', desc: 'Code-rendered, tap-to-play statecharts (HTML + PNG) from Mermaid / pstack /statechart output' },
 ];
 
 const SKILL_IDS = SKILLS.map(s => s.id);

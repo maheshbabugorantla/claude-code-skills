@@ -268,8 +268,8 @@ For each act, produce:
 - **Title** — short, evocative (e.g., "The Brute Force Path", "The Thread Was Always There")
 - **Chapter subtitle** — one sentence describing the act's argument
 - **Key insight** — the single idea the audience should retain
-- **Visual type** — one of: `concept-diagram`, `split-panel`, `fragment-diagram`, `pipeline`, `four-lane-comparison`, `architecture`, `grid-comparison`, `benchmark-cards`, `grid-industry`, `decision-flowchart`, `workflow`, `stat-circles`
-- **Crayon layout** — the corresponding `/crayon-illustration` type, looked up from the Visual Type Mapping in [references/storyboard-format.md](references/storyboard-format.md)
+- **Visual type** — one of: `concept-diagram`, `split-panel`, `fragment-diagram`, `pipeline`, `four-lane-comparison`, `architecture`, `grid-comparison`, `benchmark-cards`, `grid-industry`, `decision-flowchart`, `workflow`, `stat-circles`, or `statechart` (only when the user asks for it: the act's visual is a state machine rendered by code via `/playable-statechart`, with an optional TLC report that makes a failure act a *checked* failure rather than an asserted one; never pick it on the user's behalf)
+- **Crayon layout** — the corresponding `/crayon-illustration` type, looked up from the Visual Type Mapping in [references/storyboard-format.md](references/storyboard-format.md) (`playable-statechart` for `statechart` acts, which also carry `Chart` and optional `Report` fields)
 - **Visual description** — layout, key elements, color assignments
 - **Components (L→R)** — for multi-component visuals: 3–7 ordered components (with optional sublabels)
 - **Arrow labels** — for diagrams with connections: what each arrow's label says

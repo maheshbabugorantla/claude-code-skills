@@ -1,0 +1,26 @@
+---
+title: "a controller, two things at once"
+---
+stateDiagram-v2
+  direction LR
+  state "At the same time" as all {
+    state "leader election" as election {
+      follower: follower
+      leader: leader
+      [*] --> follower
+      follower --> leader: the lease is won
+      leader --> follower: the lease is lost
+    }
+    --
+    state "the reconcile loop" as loop {
+      idle: idle
+      reconciling: reconciling
+      requeued: requeued with backoff
+      [*] --> idle
+      idle --> reconciling: an event arrives [when leader]
+      reconciling --> idle: the object matches its spec
+      reconciling --> requeued: the apply fails
+      requeued --> reconciling: the backoff expires [when leader]
+      requeued --> idle: the lease is lost
+    }
+  }

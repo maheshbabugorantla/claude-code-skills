@@ -1,0 +1,32 @@
+---
+title: "the stale token bug"
+---
+stateDiagram-v2
+  state "Legend" as legend {
+    lg0: Breaks NeverServeExpiredToken
+    lg1: Path to the NeverServeExpiredToken bug
+  }
+  class lg0 breaks
+  class lg1 bugPath
+  s0: freshly issued
+  s1: valid
+  s2: nearly expired
+  s3: expired
+  s4: revoked
+  s5: an expired token is served
+  [*] --> s0
+  s0 --> s1: a minute passes
+  s1 --> s1: a minute passes
+  s1 --> s2: a minute passes
+  s2 --> s3: a minute passes
+  s3 --> s3: a burst of requests starts
+  s3 --> s4: revoked
+  s3 --> s5: a request is served [during a burst]
+  s4 --> s0: a new token is issued
+  classDef breaks fill:#ffecee,stroke:#e72e3b,stroke-width:2.5px,color:#cd2834
+  class s0 bugPath
+  class s1 bugPath
+  class s2 bugPath
+  class s3 bugPath
+  class s5 breaks
+  class s5 bugPath

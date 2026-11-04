@@ -1,7 +1,9 @@
 .claude/
 .github/
-tests/
-scripts/
+/tests/
+/scripts/
 *.test.js
 .DS_Store
 *.tgz
+playable-statechart/scripts/node_modules/
+playable-statechart/scripts/package-lock.json

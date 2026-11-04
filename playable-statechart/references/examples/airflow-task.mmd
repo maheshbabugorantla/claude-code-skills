@@ -1,0 +1,20 @@
+---
+title: "an Airflow task instance, from scheduled to done"
+---
+stateDiagram-v2
+  direction LR
+  s0: scheduled
+  s1: queued
+  s2: running
+  s3: success
+  s4: up for retry
+  s5: failed
+  [*] --> s0
+  s0 --> s1: the scheduler finds a slot
+  s1 --> s2: a worker picks it up
+  s2 --> s3: the task returns
+  s2 --> s4: the task raises [while retries remain]
+  s2 --> s5: the task raises [unless retries remain]
+  s4 --> s1: the retry delay passes
+  s3 --> [*]
+  s5 --> [*]

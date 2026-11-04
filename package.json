@@ -10,7 +10,8 @@
     "aws-illustration",
     "gcp-illustration",
     "crayon-illustration",
-    "technical-storybook"
+    "technical-storybook",
+    "playable-statechart"
   ],
   "engines": {
     "node": ">=20"

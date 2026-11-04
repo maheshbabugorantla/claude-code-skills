@@ -1,0 +1,24 @@
+---
+title: "a pod's life"
+---
+stateDiagram-v2
+  direction LR
+  pending: pending
+  state "running" as running {
+    init: init containers run
+    ready: ready
+    notready: not ready
+    [*] --> init
+    init --> ready: all containers up
+    ready --> notready: a readiness probe fails
+    notready --> ready: the probe passes again
+  }
+  succeeded: succeeded
+  failed: failed
+  [*] --> pending
+  pending --> running: scheduled and images pulled
+  pending --> failed: image pull backs off for good
+  running --> succeeded: every container exits 0
+  running --> failed: a container exits non-zero [unless restart policy is Always]
+  succeeded --> [*]
+  failed --> [*]

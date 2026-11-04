@@ -99,11 +99,13 @@ A subsection per act, in order, using this exact structure:
 - **Title:** <short evocative title — same as heading>
 - **Chapter subtitle:** <one sentence describing the act's argument>
 - **Key insight:** <the single idea the audience should retain>
-- **Visual type:** <one of: concept-diagram | split-panel | fragment-diagram | pipeline | four-lane-comparison | architecture | grid-comparison | benchmark-cards | grid-industry | decision-flowchart | workflow | stat-circles>
-- **Crayon layout:** <recommended /crayon-illustration type — see Visual Type Mapping below>
+- **Visual type:** <one of: concept-diagram | split-panel | fragment-diagram | pipeline | four-lane-comparison | architecture | grid-comparison | benchmark-cards | grid-industry | decision-flowchart | workflow | stat-circles | statechart>
+- **Crayon layout:** <recommended /crayon-illustration type — see Visual Type Mapping below; `statechart` acts write `playable-statechart` here>
 - **Visual description:** <layout, key elements, color assignments>
 - **Components (L→R):** <if applicable: 3–7 ordered components with optional sublabels>
 - **Arrow labels:** <if applicable: what each connection's label says>
+- **Chart:** <`statechart` acts only: path to a Mermaid `stateDiagram-v2` file, relative to the storyboard directory, e.g. `act-04.mmd`>
+- **Report:** <`statechart` acts only, optional: path to the pstack `/statechart` report.md for that chart; when present the act is a checked failure, not an asserted one>
 - **Narrative beat:** <audience's emotional state at end of act>
 - **Speaker note:** <2–3 sentences of delivery guidance>
 ```
@@ -130,8 +132,15 @@ This is the canonical mapping from storyboard visual types to `/crayon-illustrat
 | decision-flowchart | `architecture` | Top-down branches converging |
 | workflow | `process-flow` | 4-step horizontal roadmap |
 | stat-circles | `concept-cards` | 3 stat circles + Act-1 callback |
+| statechart | `playable-statechart` | Not an image prompt: rendered by code from the act's `Chart` file by `/playable-statechart`. Author opt-in only — the producer never auto-converts an act to this type. |
 
 Consumers that don't know how to render a given visual type should fall back to `concept-cards` and surface a warning to the user.
+
+### The `statechart` visual type
+
+Use it when an act's visual *is* a state machine — most often one of the failure acts (2–4), where the failure is a path through states, or Act 6 when the solution is a protocol or lifecycle. The author writes the Mermaid file next to the storyboard (`act-NN.mmd`) in the subset `/playable-statechart` accepts, and may add a pstack `/statechart` `report.md` when the chart came from a checked TLA+ model. A chart without a report renders with a visible "sketch, not a checked model" mark, so the slide never claims more than it has.
+
+Consumers route such acts to `/playable-statechart render <chart> [--report <report>] --out <storyboard-dir> --name act-NN --png`, which writes `act-NN.png` (the slide image, same path the manual Gemini export would have used) and `act-NN.html` (the tap-to-play version for a blog or a live talk).
 
 ---
 

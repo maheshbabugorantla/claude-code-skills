@@ -14,7 +14,7 @@ proactively_suggest_when:
   - User is creating blog posts, slide decks, or educational content that would benefit from a hand-drawn visual
   - User has run /technical-storybook and wants to generate visuals for each act
 metadata:
-  pairs-with: technical-storybook, aws-illustration
+  pairs-with: technical-storybook, aws-illustration, playable-statechart
 allowed-tools:
   - Read
   - Write
@@ -175,6 +175,7 @@ This is the consumer side of the methodology+style handoff: the storybook produc
 2. **Skip Steps 1–3 of the standard workflow.** Discovery is taken from the frontmatter; scope triage is moot (the storybook already produced 12 acts × 1 visual each); type recommendation is moot (each act records its own `Crayon layout`).
 
 3. **For each `### Act NN — <Title>` section in the file**, do the following:
+   - If `Visual type` is `statechart`, do not write a prompt. Hand the act to `/playable-statechart` instead: run `playable-statechart render <storyboard-dir>/<Chart> [--report <storyboard-dir>/<Report>] --out <storyboard-dir> --name act-NN --png`, which writes `act-NN.png` and `act-NN.html` directly. If the `Chart` field is missing, report the act as skipped and continue. Count these acts separately in the final summary ("N rendered by playable-statechart, M prompts written").
    - Extract `Title`, `Visual type`, `Crayon layout`, `Visual description`, `Components (L→R)` (if listed), `Arrow labels` (if listed)
    - If `Crayon layout` is missing, look up the `Visual type` in the Visual Type Mapping table from `storyboard-format.md` and use that
    - Run Step 6 of the standard workflow (Generate Prompt) using these inputs:
