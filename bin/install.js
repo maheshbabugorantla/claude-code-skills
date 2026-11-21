@@ -22,6 +22,8 @@ const SKILLS = [
   { id: 'gcp-illustration',    desc: 'Google Cloud diagrams (mxgraph.gcp2, light/dark)' },
   { id: 'crayon-illustration', desc: 'Hand-drawn style illustration prompts (7 layout types)' },
   { id: 'technical-storybook', desc: '12-act narrative storyboards for technical concepts' },
+  { id: 'isometric-illustration', desc: 'Isometric SVG scenes: stills, frames and stepped lesson pages' },
+  { id: 'technical-explainer', desc: 'Scripts stepped explainers for isometric-illustration' },
 ];
 
 const SKILL_IDS = SKILLS.map(s => s.id);
@@ -47,12 +49,18 @@ const hasUninstall = has('--uninstall', '-u');
 const hasForce     = has('--force',  '-f');
 const hasList      = has('--list');
 const usePrefix    = has('--prefix') && !has('--no-prefix');
+// --agents targets the .agents/ directory that Codex CLI and Gemini CLI both read skills from
+const hasAgents    = has('--agents');
+
+// the value after a space-separated --config-dir is a path, not a skill name
+const configDirAt  = argv.indexOf('--config-dir');
+const isFlagValue  = i => configDirAt !== -1 && i === configDirAt + 1;
 
 // positional args = anything not starting with '-' that is a known skill id
-const positionalSkills = argv.filter(a => !a.startsWith('-') && SKILL_IDS.includes(a));
+const positionalSkills = argv.filter((a, i) => !a.startsWith('-') && !isFlagValue(i) && SKILL_IDS.includes(a));
 
 // unknown positional args (user typos or unsupported names)
-const unknownArgs = argv.filter(a => !a.startsWith('-') && !SKILL_IDS.includes(a));
+const unknownArgs = argv.filter((a, i) => !a.startsWith('-') && !isFlagValue(i) && !SKILL_IDS.includes(a));
 
 function argValue(flag) {
   const i = argv.indexOf(flag);
@@ -72,6 +80,7 @@ function expandTilde(p) {
 
 function resolveTarget(isGlobal) {
   if (explicitDir) return expandTilde(explicitDir);
+  if (hasAgents) return path.join(isGlobal ? os.homedir() : process.cwd(), '.agents');
   if (isGlobal) {
     return process.env.CLAUDE_CONFIG_DIR
       ? expandTilde(process.env.CLAUDE_CONFIG_DIR)
@@ -179,6 +188,9 @@ function hasBin(cmd) {
 }
 
 function checkDeps(selectedSkillIds) {
+  if (selectedSkillIds.includes('isometric-illustration') && Number(process.versions.node.split('.')[0]) < 18) {
+    console.log(`\n${yellow}⚠  isometric-illustration needs Node 18 or newer at runtime (found ${process.versions.node})${reset}`);
+  }
   const needsJq = selectedSkillIds.some(id => id === 'aws-illustration' || id === 'gcp-illustration');
   if (needsJq && !hasBin('jq')) {
     const hint = process.platform === 'darwin'
@@ -255,7 +267,8 @@ function install(isGlobal, skillIds) {
   checkDeps(skillIds);
 
   const suffix = isGlobal ? ' --global' : ' --local';
-  console.log(`\n  ${green}${installed.length} skill(s) installed.${reset} Restart Claude Code, then run ${cyan}/help${reset}.\n`);
+  const restart = hasAgents ? 'Restart Codex CLI or Gemini CLI, then run' : 'Restart Claude Code, then run';
+  console.log(`\n  ${green}${installed.length} skill(s) installed.${reset} ${restart} ${cyan}${hasAgents ? '/skills' : '/help'}${reset}.\n`);
   console.log(`  ${dim}Add more:  npx ${PKG.name}@latest${suffix} <skill-name>`);
   console.log(`  Update:    npx ${PKG.name}@latest${suffix}`);
   console.log(`  List:      npx ${PKG.name}@latest --list`);
@@ -312,7 +325,7 @@ function uninstall(isGlobal, skillIds) {
         atomicWrite(manifestP, JSON.stringify({ ...manifest, files: remaining }, null, 2) + '\n');
       }
     }
-    console.log(`\n  ${green}✓ Uninstalled.${reset} Restart Claude Code.\n`);
+    console.log(`\n  ${green}✓ Uninstalled.${reset} Restart your agent.\n`);
   }
 
   if (hasForce) { doRemove(); return; }

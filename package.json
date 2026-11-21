@@ -1,7 +1,7 @@
 {
   "name": "mbg-claude-code-skills",
   "version": "1.0.0",
-  "description": "AWS & GCP architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — four Claude Code skills installable via npx",
+  "description": "AWS & GCP architecture illustrations, crayon-style diagrams, 12-act technical storyboards, and stepped isometric explainers \u2014 six agent skills installable via npx",
   "bin": {
     "mbg-claude-code-skills": "./bin/install.js"
   },
@@ -10,7 +10,9 @@
     "aws-illustration",
     "gcp-illustration",
     "crayon-illustration",
-    "technical-storybook"
+    "technical-storybook",
+    "isometric-illustration",
+    "technical-explainer"
   ],
   "engines": {
     "node": ">=20"
@@ -24,7 +26,12 @@
     "google-cloud",
     "illustration",
     "storybook",
-    "diagram"
+    "diagram",
+    "isometric",
+    "explainer",
+    "codex",
+    "gemini-cli",
+    "agent-skills"
   ],
   "author": "Mahesh Babu Gorantla",
   "license": "MIT",

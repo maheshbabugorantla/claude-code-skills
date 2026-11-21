@@ -1,0 +1,38 @@
+{
+  "name": "blueprint",
+  "mode": "dark",
+  "bg": "#0F2E52",
+  "ink": "#EAF3FF",
+  "muted": "#9DB7D6",
+  "round": 2,
+  "focus": "#FFD166",
+  "font": {
+    "label": "'DIN Alternate', 'DIN 2014', Bahnschrift, 'Roboto Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif",
+    "page": "'DIN Alternate', 'DIN 2014', Bahnschrift, 'Roboto Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif"
+  },
+  "board": { "top": "#143A66", "left": "#0D2A4C", "right": "#0A2240", "dot": "#3F6FA8" },
+  "stroke": { "color": "#CFE4FF", "width": 1.2 },
+  "shadow": { "color": "#041224", "opacity": 0.35 },
+  "link": { "color": "#CFE4FF", "muted": "#5E7FA6", "width": 1.8 },
+  "zone": { "fill": 0.3 },
+  "pill": { "bg": "#0F2E52", "ink": "#EAF3FF", "border": "#6E93BF" },
+  "note": { "bg": "#0F2E52", "border": "#6E93BF" },
+  "screen": { "bg": "#0A2240", "line": "#6E93BF" },
+  "hues": {
+    "neutral": { "top": "#5A799D", "left": "#43648B", "right": "#2F527B", "ink": "#D7E8FF", "edge": "#D7E8FF" },
+    "blue": { "top": "#396D9D", "left": "#2D5C8B", "right": "#234E7B", "ink": "#7CC7FF", "edge": "#7CC7FF" },
+    "green": { "top": "#397781", "left": "#2D6378", "right": "#225270", "ink": "#7BE3B0", "edge": "#7BE3B0" },
+    "amber": { "top": "#697066", "left": "#4C5E66", "right": "#354F66", "ink": "#FFD166", "edge": "#FFD166" },
+    "red": { "top": "#69576E", "left": "#4C4D6B", "right": "#354569", "ink": "#FF8B7B", "edge": "#FF8B7B" },
+    "violet": { "top": "#53629D", "left": "#3E548B", "right": "#2D497B", "ink": "#C4A8FF", "edge": "#C4A8FF" },
+    "teal": { "top": "#357690", "left": "#2A6282", "right": "#215177", "ink": "#6FE0DC", "edge": "#6FE0DC" }
+  },
+  "packets": { "request": "#FFD166", "response": "#7BE3B0", "event": "#C4A8FF", "data": "#7CC7FF", "error": "#FF8B7B" },
+  "tones": {
+    "good": { "bg": "#17495A", "ink": "#7BE3B0" },
+    "warn": { "bg": "#3D4A4F", "ink": "#FFD166" },
+    "bad": { "bg": "#44395A", "ink": "#FF9C8E" },
+    "info": { "bg": "#1D4B7C", "ink": "#8FD0FF" }
+  },
+  "page": { "bg": "#0C2645", "ink": "#EAF3FF", "muted": "#9DB7D6", "rule": "#2C527F", "accent": "#FFD166" }
+}

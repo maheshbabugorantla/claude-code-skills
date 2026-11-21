@@ -1,0 +1,277 @@
+{
+  "version": 1,
+  "title": "Every kind on one board",
+  "cast": [
+    {
+      "id": "users",
+      "kind": "actors",
+      "at": [
+        0,
+        0
+      ],
+      "count": 7,
+      "label": "Readers"
+    },
+    {
+      "id": "phone",
+      "kind": "client",
+      "at": [
+        0,
+        3.2
+      ],
+      "hue": "teal",
+      "label": "Client"
+    },
+    {
+      "id": "lb",
+      "kind": "node",
+      "at": [
+        3.2,
+        0
+      ],
+      "shape": "slab",
+      "hue": "amber",
+      "icon": "route",
+      "label": "Balancer"
+    },
+    {
+      "id": "api",
+      "kind": "node",
+      "at": [
+        3.2,
+        3.2
+      ],
+      "hue": "blue",
+      "icon": "server",
+      "label": "API",
+      "sub": "3 replicas",
+      "badge": "v2"
+    },
+    {
+      "id": "tower",
+      "kind": "node",
+      "at": [
+        3.2,
+        6.4
+      ],
+      "shape": "tower",
+      "size": "s",
+      "hue": "red",
+      "icon": "shield",
+      "label": "Auth",
+      "state": "down"
+    },
+    {
+      "id": "q",
+      "kind": "queue",
+      "at": [
+        7.3,
+        0
+      ],
+      "slots": 6,
+      "fill": 4,
+      "label": "Job queue"
+    },
+    {
+      "id": "qy",
+      "kind": "queue",
+      "at": [
+        6.6,
+        3.6
+      ],
+      "axis": "y",
+      "slots": 4,
+      "fill": 1,
+      "hue": "green",
+      "label": "Retry lane"
+    },
+    {
+      "id": "db",
+      "kind": "store",
+      "at": [
+        11.6,
+        0
+      ],
+      "size": "l",
+      "icon": "disk",
+      "label": "Primary"
+    },
+    {
+      "id": "replica",
+      "kind": "store",
+      "at": [
+        11.6,
+        3.2
+      ],
+      "state": "ghost",
+      "label": "Replica (planned)"
+    },
+    {
+      "id": "worker",
+      "kind": "node",
+      "at": [
+        6.6,
+        6.8
+      ],
+      "size": "s",
+      "state": "ghost",
+      "icon": "gear",
+      "label": "Worker"
+    },
+    {
+      "id": "zone",
+      "kind": "zone",
+      "at": [
+        11.6,
+        1.6
+      ],
+      "span": [
+        2.6,
+        5.4
+      ],
+      "hue": "green",
+      "label": "Region east"
+    },
+    {
+      "id": "ring",
+      "kind": "ring",
+      "at": [
+        11.2,
+        7.6
+      ],
+      "radius": 1.5,
+      "label": "Hash ring",
+      "marks": [
+        {
+          "at": 20,
+          "label": "A"
+        },
+        {
+          "at": 140,
+          "label": "B",
+          "hue": "green"
+        },
+        {
+          "at": 260,
+          "label": "C",
+          "hue": "violet"
+        },
+        {
+          "at": 80,
+          "kind": "key",
+          "label": "k1"
+        },
+        {
+          "at": 200,
+          "kind": "key"
+        }
+      ],
+      "arcs": [
+        {
+          "from": 20,
+          "to": 140,
+          "hue": "green"
+        }
+      ]
+    },
+    {
+      "id": "note",
+      "kind": "note",
+      "at": [
+        1.2,
+        7.6
+      ],
+      "title": "Commit rule",
+      "lines": [
+        "+ majority acked",
+        "- minority only",
+        "! leader unknown"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "u-lb",
+      "from": "users",
+      "to": "lb",
+      "label": "HTTPS"
+    },
+    {
+      "id": "p-api",
+      "from": "phone",
+      "to": "api",
+      "arrows": "both"
+    },
+    {
+      "id": "lb-api",
+      "from": "lb",
+      "to": "api",
+      "style": "dashed"
+    },
+    {
+      "id": "api-auth",
+      "from": "api",
+      "to": "tower",
+      "style": "cut"
+    },
+    {
+      "id": "lb-q",
+      "from": "lb",
+      "to": "q"
+    },
+    {
+      "id": "api-qy",
+      "from": "api",
+      "to": "qy",
+      "via": "xyx",
+      "style": "pulse",
+      "arrows": "none"
+    },
+    {
+      "id": "q-db",
+      "from": "q",
+      "to": "db"
+    },
+    {
+      "id": "db-rep",
+      "from": "db",
+      "to": "replica",
+      "style": "off"
+    },
+    {
+      "id": "qy-worker",
+      "from": "qy",
+      "to": "worker"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Kitchen sink",
+      "focus": [],
+      "packets": [
+        {
+          "on": "u-lb",
+          "count": 3
+        },
+        {
+          "on": "p-api",
+          "kind": "response",
+          "reverse": true
+        },
+        {
+          "on": "lb-q",
+          "kind": "event",
+          "count": 2
+        },
+        {
+          "on": "q-db",
+          "kind": "data"
+        },
+        {
+          "on": "api-auth",
+          "kind": "error"
+        }
+      ]
+    }
+  ]
+}

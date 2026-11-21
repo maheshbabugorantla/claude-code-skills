@@ -1,0 +1,38 @@
+{
+  "name": "print",
+  "mode": "light",
+  "bg": "#FFFFFF",
+  "ink": "#111111",
+  "muted": "#555555",
+  "round": 1.5,
+  "focus": "#1B3FA8",
+  "font": {
+    "label": "Charter, 'Bitstream Charter', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif",
+    "page": "Charter, 'Bitstream Charter', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif"
+  },
+  "board": { "top": "#FFFFFF", "left": "#E9E9E9", "right": "#D9D9D9", "dot": "#C4C4C4" },
+  "stroke": { "color": "#111111", "width": 1.1 },
+  "shadow": { "color": "#000000", "opacity": 0.1 },
+  "link": { "color": "#111111", "muted": "#9A9A9A", "width": 1.6 },
+  "zone": { "fill": 0.5 },
+  "pill": { "bg": "#FFFFFF", "ink": "#111111", "border": "#111111" },
+  "note": { "bg": "#FFFFFF", "border": "#111111" },
+  "screen": { "bg": "#111111", "line": "#8A8A8A" },
+  "hues": {
+    "neutral": { "top": "#FFFFFF", "left": "#EDEDED", "right": "#DADADA", "ink": "#111111", "edge": "#111111" },
+    "blue": { "top": "#E3E9FB", "left": "#C5D2F6", "right": "#AEBFF0", "ink": "#1B3FA8", "edge": "#1B3FA8" },
+    "green": { "top": "#F2F2F2", "left": "#DCDCDC", "right": "#C6C6C6", "ink": "#111111", "edge": "#555555" },
+    "amber": { "top": "#E6E6E6", "left": "#CFCFCF", "right": "#B9B9B9", "ink": "#111111", "edge": "#555555" },
+    "red": { "top": "#D2D2D2", "left": "#B5B5B5", "right": "#9F9F9F", "ink": "#111111", "edge": "#333333" },
+    "violet": { "top": "#EDEDED", "left": "#D2D2D2", "right": "#BDBDBD", "ink": "#111111", "edge": "#555555" },
+    "teal": { "top": "#F6F6F6", "left": "#E2E2E2", "right": "#CECECE", "ink": "#111111", "edge": "#555555" }
+  },
+  "packets": { "request": "#1B3FA8", "response": "#111111", "event": "#7A7A7A", "data": "#8FA6E8", "error": "#C0271D" },
+  "tones": {
+    "good": { "bg": "#F1F1F1", "ink": "#111111" },
+    "warn": { "bg": "#F1F1F1", "ink": "#111111" },
+    "bad": { "bg": "#FBE9E7", "ink": "#C0271D" },
+    "info": { "bg": "#E3E9FB", "ink": "#1B3FA8" }
+  },
+  "page": { "bg": "#FFFFFF", "ink": "#111111", "muted": "#555555", "rule": "#BBBBBB", "accent": "#1B3FA8" }
+}

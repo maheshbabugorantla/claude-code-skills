@@ -1,0 +1,547 @@
+{
+  "version": 1,
+  "title": "How a prompt travels through an LLM gateway",
+  "subtitle": "One request, followed hop by hop. Numbers are illustrative.",
+  "theme": "daylight",
+  "cast": [
+    {
+      "id": "app",
+      "kind": "client",
+      "at": [
+        -0.7,
+        2.6
+      ],
+      "label": "Your app",
+      "hue": "blue"
+    },
+    {
+      "id": "gw",
+      "kind": "node",
+      "at": [
+        2.9,
+        2.6
+      ],
+      "size": "l",
+      "hue": "blue",
+      "icon": "route",
+      "label": "Gateway",
+      "sub": "one endpoint"
+    },
+    {
+      "id": "book",
+      "kind": "store",
+      "at": [
+        2.9,
+        -0.5
+      ],
+      "size": "s",
+      "hue": "amber",
+      "icon": "key",
+      "label": "Keys + budgets",
+      "labelSide": "right"
+    },
+    {
+      "id": "cache",
+      "kind": "store",
+      "at": [
+        2.9,
+        5.6
+      ],
+      "size": "s",
+      "hue": "teal",
+      "icon": "layers",
+      "label": "Response cache"
+    },
+    {
+      "id": "models",
+      "kind": "zone",
+      "at": [
+        6.6,
+        2.6
+      ],
+      "span": [
+        2.4,
+        7.2
+      ],
+      "hue": "violet",
+      "label": "Models"
+    },
+    {
+      "id": "pa",
+      "kind": "node",
+      "at": [
+        6.6,
+        0
+      ],
+      "hue": "violet",
+      "icon": "cloud",
+      "label": "Provider A"
+    },
+    {
+      "id": "pb",
+      "kind": "node",
+      "at": [
+        6.6,
+        2.6
+      ],
+      "hue": "violet",
+      "icon": "cloud",
+      "label": "Provider B"
+    },
+    {
+      "id": "own",
+      "kind": "node",
+      "at": [
+        6.6,
+        5.2
+      ],
+      "hue": "green",
+      "icon": "chip",
+      "label": "Self-hosted"
+    },
+    {
+      "id": "rule",
+      "kind": "note",
+      "at": [
+        -0.4,
+        -0.1
+      ],
+      "title": "Routing rule",
+      "lines": [
+        "task = summarise",
+        "> first: Provider B",
+        "> fallback: Self-hosted"
+      ]
+    },
+    {
+      "id": "costs",
+      "kind": "note",
+      "at": [
+        -0.4,
+        -0.1
+      ],
+      "title": "The trade",
+      "lines": [
+        "+ one place for policy",
+        "- one more hop per call",
+        "! on the critical path"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "direct-pa",
+      "from": "app",
+      "to": "pa",
+      "via": "xyx",
+      "bend": 0.62
+    },
+    {
+      "id": "direct-pb",
+      "from": "app",
+      "to": "pb"
+    },
+    {
+      "id": "direct-own",
+      "from": "app",
+      "to": "own",
+      "via": "xyx",
+      "bend": 0.62
+    },
+    {
+      "id": "app-gw",
+      "from": "app",
+      "to": "gw",
+      "arrows": "both"
+    },
+    {
+      "id": "gw-book",
+      "from": "gw",
+      "to": "book",
+      "arrows": "both"
+    },
+    {
+      "id": "gw-cache",
+      "from": "gw",
+      "to": "cache",
+      "arrows": "both"
+    },
+    {
+      "id": "gw-pa",
+      "from": "gw",
+      "to": "pa",
+      "arrows": "both",
+      "via": "xyx"
+    },
+    {
+      "id": "gw-pb",
+      "from": "gw",
+      "to": "pb",
+      "arrows": "both"
+    },
+    {
+      "id": "gw-own",
+      "from": "gw",
+      "to": "own",
+      "arrows": "both",
+      "via": "xyx"
+    }
+  ],
+  "steps": [
+    {
+      "id": "direct",
+      "tag": "problem",
+      "title": "Three models, three integrations",
+      "body": [
+        "Your app calls three model providers directly. Each one brings its own SDK, its own secret key, its own rate limits and its own bill.",
+        "Nothing in the middle can answer two plain questions: who spent what, and what happens when one of them slows down?"
+      ],
+      "packets": [
+        {
+          "on": "direct-pa"
+        },
+        {
+          "on": "direct-pb"
+        },
+        {
+          "on": "direct-own"
+        }
+      ],
+      "gauges": {
+        "keys": {
+          "label": "Provider keys in the app",
+          "value": "3",
+          "tone": "warn"
+        },
+        "sdks": {
+          "label": "Integrations to maintain",
+          "value": "3",
+          "tone": "warn"
+        }
+      }
+    },
+    {
+      "id": "door",
+      "tag": "idea",
+      "title": "Put one door in front",
+      "body": [
+        "A gateway is a small service that every model call passes through. The app keeps one endpoint and one key. The provider keys move behind the door.",
+        "Every later step is something the gateway can do only because all traffic crosses one point."
+      ],
+      "changes": [
+        "+ Gateway between the app and the models",
+        "~ Provider keys move out of the app",
+        "- Three direct integrations"
+      ],
+      "show": [
+        "gw",
+        "app-gw",
+        "gw-pa",
+        "gw-pb",
+        "gw-own"
+      ],
+      "hide": [
+        "direct-pa",
+        "direct-pb",
+        "direct-own"
+      ],
+      "packets": [
+        {
+          "on": "app-gw",
+          "count": 2
+        }
+      ],
+      "gauges": {
+        "keys": {
+          "value": "0",
+          "tone": "good"
+        },
+        "sdks": {
+          "value": "1",
+          "tone": "good"
+        }
+      }
+    },
+    {
+      "id": "who",
+      "tag": "mechanism",
+      "title": "Who is asking?",
+      "body": [
+        "The app sends a key that the gateway issued, not one from a provider. Call it a gateway key. The gateway looks it up and learns which team is calling and what that team may use."
+      ],
+      "idea": "A gateway key names a caller. A provider key names an account. Keeping them apart lets you cut off one team without rotating a provider secret.",
+      "show": [
+        "book",
+        "gw-book"
+      ],
+      "focus": [
+        "app",
+        "gw",
+        "book"
+      ],
+      "packets": [
+        {
+          "on": "app-gw",
+          "label": "gateway key"
+        },
+        {
+          "on": "gw-book",
+          "kind": "data"
+        }
+      ],
+      "set": {
+        "gw": {
+          "badge": {
+            "text": "team: search",
+            "tone": "info"
+          }
+        }
+      }
+    },
+    {
+      "id": "budget",
+      "tag": "mechanism",
+      "title": "Can they afford it?",
+      "body": [
+        "The same lookup returns the team's budget and rate limit. If the month's budget is spent, or the caller is sending faster than allowed, the gateway refuses here, before any model is paid."
+      ],
+      "focus": [
+        "gw",
+        "book"
+      ],
+      "packets": [
+        {
+          "on": "gw-book",
+          "kind": "data",
+          "reverse": true
+        }
+      ],
+      "set": {
+        "gw": {
+          "badge": {
+            "text": "within budget",
+            "tone": "good"
+          }
+        }
+      },
+      "gauges": {
+        "budget": {
+          "label": "Team budget left",
+          "value": "62%",
+          "tone": "good"
+        }
+      }
+    },
+    {
+      "id": "cache",
+      "tag": "mechanism",
+      "title": "Seen this before?",
+      "body": [
+        "Next the gateway checks a cache: a store of earlier prompts and their answers. An exact repeat is answered from it with no model call.",
+        "A hit costs one lookup. A miss costs the lookup plus the model call, so a cache pays only when prompts repeat. This one is a miss."
+      ],
+      "show": [
+        "cache",
+        "gw-cache"
+      ],
+      "focus": [
+        "gw",
+        "cache"
+      ],
+      "packets": [
+        {
+          "on": "gw-cache",
+          "kind": "data"
+        }
+      ],
+      "set": {
+        "gw": {
+          "badge": null
+        },
+        "cache": {
+          "badge": "miss"
+        }
+      }
+    },
+    {
+      "id": "route",
+      "tag": "mechanism",
+      "title": "Pick a model",
+      "body": [
+        "A routing rule maps the request to a model. A rule can read the task, the caller, the price, and how healthy each provider is right now.",
+        "Here the rule sends summaries to Provider B first."
+      ],
+      "show": [
+        "rule"
+      ],
+      "focus": [
+        "gw",
+        "pb"
+      ],
+      "packets": [
+        {
+          "on": "gw-pb",
+          "count": 2
+        }
+      ],
+      "set": {
+        "cache": {
+          "badge": null
+        },
+        "gw": {
+          "badge": "route: Provider B"
+        }
+      }
+    },
+    {
+      "id": "throttle",
+      "tag": "failure",
+      "title": "Provider B says slow down",
+      "body": [
+        "Provider B answers 429: too many requests. Without a gateway, the app has to notice, wait and retry by itself, in every code path that calls a model."
+      ],
+      "focus": [
+        "gw",
+        "pb"
+      ],
+      "packets": [
+        {
+          "on": "gw-pb",
+          "kind": "error",
+          "reverse": true
+        }
+      ],
+      "set": {
+        "pb": {
+          "state": "warn",
+          "badge": {
+            "text": "429",
+            "tone": "bad"
+          }
+        },
+        "gw-pb": {
+          "style": "cut"
+        }
+      }
+    },
+    {
+      "id": "fallback",
+      "tag": "fix",
+      "title": "Fall back, don't fail",
+      "body": [
+        "The rule lists a fallback. The gateway retries the same request on the self-hosted model and returns that answer. The app sees one slower success, not an error."
+      ],
+      "idea": "A fallback trades latency or quality for availability. Whether that trade is right depends on the task, so it belongs in a rule you can read, not in scattered retry code.",
+      "focus": [
+        "app",
+        "gw",
+        "own"
+      ],
+      "packets": [
+        {
+          "on": "gw-own"
+        },
+        {
+          "on": "gw-own",
+          "kind": "response",
+          "reverse": true
+        },
+        {
+          "on": "app-gw",
+          "kind": "response",
+          "reverse": true
+        }
+      ],
+      "set": {
+        "gw": {
+          "badge": {
+            "text": "fallback: self-hosted",
+            "tone": "warn"
+          }
+        }
+      },
+      "gauges": {
+        "errors": {
+          "label": "Errors the app saw",
+          "value": "0",
+          "tone": "good"
+        }
+      }
+    },
+    {
+      "id": "meter",
+      "tag": "mechanism",
+      "title": "Write it down",
+      "body": [
+        "Before it replies, the gateway records the call: caller, model, tokens in and out, cost, latency. That single ledger is what makes per-team budgets, alerts and a monthly bill possible."
+      ],
+      "focus": [
+        "gw",
+        "book"
+      ],
+      "packets": [
+        {
+          "on": "gw-book",
+          "kind": "event"
+        }
+      ],
+      "set": {
+        "gw": {
+          "badge": null
+        },
+        "book": {
+          "badge": {
+            "text": "+1 usage row",
+            "tone": "info"
+          }
+        }
+      },
+      "gauges": {
+        "budget": {
+          "value": "61%"
+        }
+      }
+    },
+    {
+      "id": "trade",
+      "tag": "tradeoff",
+      "title": "What the door costs",
+      "body": [
+        "Every call now makes one more hop, and the gateway sits on the critical path: if it is down, every model is down for you. Run more than one copy, and keep it boring.",
+        "In return there is one place for keys, budgets, routing and records."
+      ],
+      "changes": [
+        "+ One place for keys, budgets, routing and records",
+        "- One extra network hop on every call",
+        "! The gateway must be more available than any provider behind it"
+      ],
+      "show": [
+        "costs"
+      ],
+      "hide": [
+        "rule"
+      ],
+      "packets": [
+        {
+          "on": "app-gw",
+          "count": 2
+        },
+        {
+          "on": "gw-pa"
+        }
+      ],
+      "set": {
+        "pb": {
+          "state": "ok",
+          "badge": null
+        },
+        "gw-pb": {
+          "style": "solid"
+        },
+        "book": {
+          "badge": null
+        }
+      }
+    }
+  ]
+}
