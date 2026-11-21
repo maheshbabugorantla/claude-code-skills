@@ -1,6 +1,6 @@
 # mbg-claude-code-skills
 
-Four Claude Code skills — AWS & GCP architecture illustrations, crayon-style diagrams, and 12-act technical storyboards — installable in one command.
+Six agent skills — AWS & GCP architecture illustrations, crayon-style diagrams, 12-act technical storyboards, and stepped isometric explainers — installable in one command. Written for Claude Code; the two isometric skills also run in Codex CLI and Gemini CLI.
 
 ## Install
 
@@ -8,7 +8,13 @@ Four Claude Code skills — AWS & GCP architecture illustrations, crayon-style d
 npx mbg-claude-code-skills@latest --global
 ```
 
-Restart Claude Code after installing. All four skills appear in `/help`.
+Restart Claude Code after installing. All six skills appear in `/help`.
+
+For Codex CLI and Gemini CLI, which both read skills from `~/.agents/skills/`:
+
+```bash
+npx mbg-claude-code-skills@latest --global --agents isometric-illustration technical-explainer
+```
 
 ## Skills
 
@@ -18,10 +24,13 @@ Restart Claude Code after installing. All four skills appear in `/help`.
 | `gcp-illustration` | `/gcp-illustration` | Generates a Gemini AI image prompt + draw.io XML using `mxgraph.gcp2` stencils. Material design aesthetic, Google Cloud core color palette. |
 | `crayon-illustration` | `/crayon-illustration` | Generates a hand-drawn crayon-style illustration prompt for Gemini, DALL-E, or Midjourney. 7 layout types for technical concepts. |
 | `technical-storybook` | `/technical-storybook` | Designs 12-act narrative storyboards that teach technical concepts through contrastive argumentation. Pairs with `/crayon-illustration` for per-act visuals. |
+| `technical-explainer` | `/technical-explainer` | Scripts a stepped explainer: a cast, a few gauges, and 6 to 12 steps that each change one thing on one persistent diagram. Pairs with `/isometric-illustration`. |
+| `isometric-illustration` | `/isometric-illustration` | Draws a system as an isometric SVG scene with a bundled engine: a still, a frame per step, or a self-contained lesson page with a step player. Three themes. Optional cover image through Nano Banana Pro. |
 
 ## Requirements
 
 - **Node.js ≥ 20** (installer only — not needed at runtime)
+- **Node.js ≥ 18 at runtime** for `isometric-illustration` only: its engine is JavaScript with no dependencies
 - **`jq`** — required by `aws-illustration` and `gcp-illustration` service-lookup scripts
 
   ```bash
@@ -63,6 +72,8 @@ Arguments:
 Options:
   --global, -g          Install to ~/.claude/skills/  (default when non-interactive)
   --local, -l           Install to ./.claude/skills/  (current project only)
+  --agents              Install to ~/.agents/skills/ (or ./.agents/skills/ with --local),
+                        the directory Codex CLI and Gemini CLI read
   --list                List all available skills
   --uninstall, -u       Remove installed skills
   --force, -f           Skip confirmation prompt (for --uninstall)
