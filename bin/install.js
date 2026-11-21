@@ -48,11 +48,15 @@ const hasForce     = has('--force',  '-f');
 const hasList      = has('--list');
 const usePrefix    = has('--prefix') && !has('--no-prefix');
 
+// the value after a space-separated --config-dir is a path, not a skill name
+const configDirAt  = argv.indexOf('--config-dir');
+const isFlagValue  = i => configDirAt !== -1 && i === configDirAt + 1;
+
 // positional args = anything not starting with '-' that is a known skill id
-const positionalSkills = argv.filter(a => !a.startsWith('-') && SKILL_IDS.includes(a));
+const positionalSkills = argv.filter((a, i) => !a.startsWith('-') && !isFlagValue(i) && SKILL_IDS.includes(a));
 
 // unknown positional args (user typos or unsupported names)
-const unknownArgs = argv.filter(a => !a.startsWith('-') && !SKILL_IDS.includes(a));
+const unknownArgs = argv.filter((a, i) => !a.startsWith('-') && !isFlagValue(i) && !SKILL_IDS.includes(a));
 
 function argValue(flag) {
   const i = argv.indexOf(flag);
